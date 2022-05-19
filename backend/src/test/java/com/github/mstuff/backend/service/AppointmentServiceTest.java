@@ -48,6 +48,7 @@ class AppointmentServiceTest {
         verify(appointmentRepository).findAll();
         assertEquals(expected, actual);
 
+
     }
 
 
