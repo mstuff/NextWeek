@@ -42,7 +42,7 @@ class ScheduleEntryControllerTest {
 
         //WHEN
         List<ScheduleEntry> actual = webTestClient.get()
-                .uri("/api/appointments")
+                .uri("/api/schedule")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
                 .expectBodyList(ScheduleEntry.class)
