@@ -12,13 +12,13 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@Document(collection = "appointments")
-public class Appointment {
+@Document(collection = "scheduleEntries")
+public class ScheduleEntry {
 
     @Id
     String id;
     String title;
     String description;
-    String appointmentDummyDate;
+    String entryDummyDate;
 
 }
