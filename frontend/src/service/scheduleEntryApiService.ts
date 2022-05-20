@@ -3,6 +3,6 @@ import axios from "axios";
 
 
 export const getAllScheduleEntriesByApi: () => Promise<ScheduleEntry[]> = () => {
-    return axios.get("/api/appointments")
+    return axios.get("/api/schedule")
         .then(response => response.data);
 }

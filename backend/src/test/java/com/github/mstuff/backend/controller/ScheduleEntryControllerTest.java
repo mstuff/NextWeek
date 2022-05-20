@@ -1,7 +1,7 @@
 package com.github.mstuff.backend.controller;
 
-import com.github.mstuff.backend.model.Appointment;
-import com.github.mstuff.backend.repository.AppointmentRepository;
+import com.github.mstuff.backend.model.ScheduleEntry;
+import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,46 +15,46 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(webEnvironment =
         SpringBootTest.WebEnvironment.RANDOM_PORT)
-class AppointmentControllerTest {
+class ScheduleEntryControllerTest {
 
     @Autowired
     private WebTestClient webTestClient;
 
     @Autowired
-    private AppointmentRepository appointmentRepository;
+    private ScheduleEntryRepository scheduleEntryRepository;
 
     @BeforeEach
     public void cleanUp(){
-        appointmentRepository.deleteAll();
+        scheduleEntryRepository.deleteAll();
     }
 
     @Test
     void getAllAppointments_shouldReturnAppointmentsFromDb() {
 
         //GIVEN
-        Appointment appointment1 = Appointment.builder()
+        ScheduleEntry scheduleEntry1 = ScheduleEntry.builder()
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .appointmentDummyDate("21.05.2022")
+                .entryDummyDate("21.05.2022")
                 .build();
-        appointmentRepository.insert(appointment1);
+        scheduleEntryRepository.insert(scheduleEntry1);
 
         //WHEN
-        List<Appointment> actual = webTestClient.get()
+        List<ScheduleEntry> actual = webTestClient.get()
                 .uri("/api/appointments")
                 .exchange()
                 .expectStatus().is2xxSuccessful()
-                .expectBodyList(Appointment.class)
+                .expectBodyList(ScheduleEntry.class)
                 .returnResult()
                 .getResponseBody();
 
         //THEN
-        List<Appointment> expected = List.of(Appointment.builder()
+        List<ScheduleEntry> expected = List.of(ScheduleEntry.builder()
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .appointmentDummyDate("21.05.2022")
+                .entryDummyDate("21.05.2022")
                 .build());
 
         assertEquals(expected, actual);
