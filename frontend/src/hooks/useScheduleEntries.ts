@@ -9,7 +9,8 @@ export default function useScheduleEntries(){
 
     useEffect(() => {
         getAllScheduleEntriesByApi()
-            .then(data => setScheduleEntries(data));
+            .then(data => setScheduleEntries(data))
+            .catch(console.error);
         }, [])
 
     return {scheduleEntries}
