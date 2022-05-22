@@ -7,17 +7,18 @@ import useScheduleEntries from "./hooks/useScheduleEntries";
 
 export default function App() {
 
-    const {scheduleEntries} = useScheduleEntries();
+    const {scheduleEntries, addScheduleEntry} = useScheduleEntries();
 
 
     return (
         <div className="App">
             <BrowserRouter>
-            <Routes>
-                <Route path={'/overview'}
-                       element={<ScheduleEntriesOverviewPage scheduleEntries={scheduleEntries}/>}
-                />
-            </Routes>
+                <Routes>
+                    <Route path={'/overview'}
+                           element={<ScheduleEntriesOverviewPage scheduleEntries={scheduleEntries}
+                                                                 addScheduleEntry={addScheduleEntry}/>}
+                    />
+                </Routes>
             </BrowserRouter>
         </div>
     );

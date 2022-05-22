@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import {getAllScheduleEntriesByApi} from "../service/scheduleEntryApiService";
+import {addNewScheduleEntry, getAllScheduleEntriesByApi} from "../service/scheduleEntryApiService";
 
 
 export default function useScheduleEntries(){
@@ -13,5 +13,11 @@ export default function useScheduleEntries(){
             .catch(console.error);
         }, [])
 
-    return {scheduleEntries}
+    const addScheduleEntry = (newEntry: Omit<ScheduleEntry, "id">) => {
+        addNewScheduleEntry(newEntry)
+            .then(addedEntry => setScheduleEntries([...scheduleEntries, addedEntry]))
+            .catch(console.error);
+    }
+
+    return {scheduleEntries, addScheduleEntry}
 }
