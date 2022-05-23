@@ -37,8 +37,6 @@ public class ScheduleEntryService {
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException("There has been an invalid entry:", e);
         }
-
-
     }
 
     private void validateInput(DtoNewScheduleEntry dtoNewEntry) throws IllegalArgumentException{
