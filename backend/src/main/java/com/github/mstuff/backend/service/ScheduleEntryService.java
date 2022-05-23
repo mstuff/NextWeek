@@ -48,7 +48,5 @@ public class ScheduleEntryService {
         } else if(dtoNewEntry.getEntryDummyDate() == null){
             throw new IllegalArgumentException("The date of the new entry was null");
         }
-
-
     }
 }
