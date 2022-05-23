@@ -6,7 +6,7 @@ type ScheduleEntryCardProps = {
     scheduleEntry: ScheduleEntry;
 }
 
-export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProps){
+export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProps) {
     return <div className={"schedule-entry-card"}>
         <div>{scheduleEntry.title}</div>
         <div>{scheduleEntry.description}</div>

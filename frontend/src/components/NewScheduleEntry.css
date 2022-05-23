@@ -1,25 +1,21 @@
 
-
-.new-entry-form{
+.new-entry-form {
     background-color: #88AACC;
     color: #36413E;
-    width:200px;
-    padding:10px;
-
-
-
+    width: 200px;
+    padding: 10px;
 }
 
-.new-entry-input-field{
-    width:200px;
-    padding:10px;
-    margin:5px 0 5px;
-    border-radius:10px;
+.new-entry-input-field {
+    width: 200px;
+    padding: 10px;
+    margin: 5px 0 5px;
+    border-radius: 10px;
 }
 
-.new-entry-add-button{
-    width:100px;
-    padding:5px;
-    margin:5px 0 5px;
+.new-entry-add-button {
+    width: 100px;
+    padding: 5px;
+    margin: 5px 0 5px;
     border-radius: 5px;
 }

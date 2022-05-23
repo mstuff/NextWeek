@@ -109,5 +109,4 @@ class ScheduleEntryControllerTest {
                 .expectStatus().is5xxServerError();
 
     }
-
 }

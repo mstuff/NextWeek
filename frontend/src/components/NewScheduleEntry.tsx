@@ -7,7 +7,6 @@ type NewScheduleEntryProps = {
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
 }
 
-
 export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryProps) {
 
     const [title, setTitle] = useState('');
@@ -40,7 +39,6 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
 
     }
 
-
     return (
         <div>
             <form onSubmit={onAdd}
@@ -65,6 +63,5 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             </form>
         </div>
     )
-
 
 }

@@ -1,10 +1,10 @@
 
-.schedule-entry-card{
+.schedule-entry-card {
 
-background-color: #A9C0D6;
-color: #36413E;
+    background-color: #A9C0D6;
+    color: #36413E;
 
-    margin: 4% 1.5%  0.5% 1.5%;
+    margin: 4% 1.5% 0.5% 1.5%;
 
     border: solid #8098b2;
     border-radius: 5pt;
@@ -13,7 +13,4 @@ color: #36413E;
     width: 300px;
 
     box-shadow: 5px 5px 10px #282c34;
-
-
-
 }

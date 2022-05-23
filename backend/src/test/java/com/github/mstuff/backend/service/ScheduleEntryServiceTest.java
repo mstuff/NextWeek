@@ -5,7 +5,6 @@ import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.junit.jupiter.api.Test;
 
-
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,7 +12,6 @@ import static org.mockito.Mockito.*;
 
 
 class ScheduleEntryServiceTest {
-
 
     private final ScheduleEntryRepository scheduleEntryRepository = mock(ScheduleEntryRepository.class);
     private final ScheduleEntryService scheduleEntryService = new ScheduleEntryService(scheduleEntryRepository);
@@ -48,7 +46,6 @@ class ScheduleEntryServiceTest {
 
         verify(scheduleEntryRepository).findAll();
         assertEquals(expected, actual);
-
     }
 
     @Test
@@ -87,7 +84,6 @@ class ScheduleEntryServiceTest {
 
         verify(scheduleEntryRepository).insert(newEntry1);
         assertEquals(expected, actual);
-
     }
 
     @Test
@@ -104,9 +100,5 @@ class ScheduleEntryServiceTest {
         //THEN
         assertThrows(IllegalArgumentException.class,
                 () -> scheduleEntryService.addNewScheduleEntry(dtoNewEntry));
-
-
     }
-
-
 }

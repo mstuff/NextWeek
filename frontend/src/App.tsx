@@ -18,12 +18,12 @@ export default function App() {
                 <div>
                     <Header/>
                     <NavigationBar/>
-                <Routes>
-                    <Route path={'/overview'}
-                           element={<ScheduleEntriesOverviewPage scheduleEntries={scheduleEntries}
-                                                                 addScheduleEntry={addScheduleEntry}/>}
-                    />
-                </Routes>
+                    <Routes>
+                        <Route path={'/overview'}
+                               element={<ScheduleEntriesOverviewPage scheduleEntries={scheduleEntries}
+                                                                     addScheduleEntry={addScheduleEntry}/>}
+                        />
+                    </Routes>
                 </div>
             </BrowserRouter>
         </div>
