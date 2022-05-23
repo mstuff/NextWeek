@@ -1,15 +1,25 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import ScheduleEntryCard from "../components/ScheduleEntryCard";
+import ListOfScheduleEntries from "../components/ListOfScheduleEntries";
+import NewScheduleEntry from "../components/NewScheduleEntry";
 
 type ScheduleEntriesOverviewPageProps = {
     scheduleEntries: ScheduleEntry [];
+    addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
 }
 
-
-export default function ScheduleEntriesOverviewPage({scheduleEntries}: ScheduleEntriesOverviewPageProps){
+export default function ScheduleEntriesOverviewPage({
+                                                        scheduleEntries,
+                                                        addScheduleEntry
+                                                    }: ScheduleEntriesOverviewPageProps) {
 
     return <div>
-        {scheduleEntries.map(entry => <ScheduleEntryCard key={entry.id} scheduleEntry={entry}/>)}
+        <div>
+            <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
+        </div>
+        <div>
+            <ListOfScheduleEntries scheduleEntries={scheduleEntries}/>
+        </div>
+
     </div>
 
 }

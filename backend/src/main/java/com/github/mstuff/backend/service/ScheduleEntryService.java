@@ -1,5 +1,6 @@
 package com.github.mstuff.backend.service;
 
+import com.github.mstuff.backend.dto.DtoNewScheduleEntry;
 import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,5 +22,31 @@ public class ScheduleEntryService {
        return scheduleEntryRepository.findAll();
     }
 
+    public ScheduleEntry addNewScheduleEntry(DtoNewScheduleEntry dtoNewScheduleEntry) {
 
+        try {
+            ScheduleEntry newScheduleEntry = new ScheduleEntry();
+            validateInput(dtoNewScheduleEntry);
+
+            newScheduleEntry.setTitle(dtoNewScheduleEntry.getTitle());
+            newScheduleEntry.setDescription(dtoNewScheduleEntry.getDescription());
+            newScheduleEntry.setEntryDummyDate(dtoNewScheduleEntry.getEntryDummyDate());
+
+            return scheduleEntryRepository.insert(newScheduleEntry);
+
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("There has been an invalid entry:", e);
+        }
+    }
+
+    private void validateInput(DtoNewScheduleEntry dtoNewEntry) throws IllegalArgumentException{
+
+        if(dtoNewEntry.getTitle() == null){
+            throw new IllegalArgumentException("The title of the new entry was null");
+        } else if(dtoNewEntry.getDescription() == null){
+            throw new IllegalArgumentException("The description of the new entry was null");
+        } else if(dtoNewEntry.getEntryDummyDate() == null){
+            throw new IllegalArgumentException("The date of the new entry was null");
+        }
+    }
 }

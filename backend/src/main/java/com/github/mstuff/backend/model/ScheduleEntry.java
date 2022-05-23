@@ -16,9 +16,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ScheduleEntry {
 
     @Id
-    String id;
-    String title;
-    String description;
-    String entryDummyDate;
+    private String id;
+    private String title;
+    private String description;
+    private String entryDummyDate;
 
 }

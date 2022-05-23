@@ -9,6 +9,6 @@ export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProp
     return <div>
         <div>{scheduleEntry.title}</div>
         <div>{scheduleEntry.description}</div>
-        <div>{scheduleEntry.toScheduleDummyDate}</div>
+        <div>{scheduleEntry.entryDummyDate}</div>
     </div>
 }

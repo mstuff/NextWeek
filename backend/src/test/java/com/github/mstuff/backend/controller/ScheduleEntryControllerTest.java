@@ -1,5 +1,6 @@
 package com.github.mstuff.backend.controller;
 
+import com.github.mstuff.backend.dto.DtoNewScheduleEntry;
 import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,4 +61,53 @@ class ScheduleEntryControllerTest {
         assertEquals(expected, actual);
 
     }
+
+    @Test
+    void addNewScheduleEntry_shouldReturnTheNewScheduleEntry(){
+
+        //GIVEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .title("Appointment1")
+                .description("description1")
+                .entryDummyDate("21.05.2022")
+                .build();
+
+        //WHEN
+        ScheduleEntry actual = webTestClient.post()
+                .uri("/api/schedule")
+                .bodyValue(dtoNewEntry)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ScheduleEntry.class)
+                .returnResult()
+                .getResponseBody();
+
+        //THEN
+        assertNotNull(actual);
+        assertNotNull(actual.getId());
+        assertEquals("Appointment1", actual.getTitle());
+        assertEquals("description1", actual.getDescription());
+        assertEquals("21.05.2022", actual.getEntryDummyDate());
+        assertEquals(24, actual.getId().length());
+
+    }
+
+    @Test
+    void addNewScheduleEntry_whenMissingField_shouldThrowIllegalArgumentException(){
+
+        //GIVEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .description("description1")
+                .entryDummyDate("21.05.2022")
+                .build();
+
+        //WHEN //THEN
+        webTestClient.post()
+                .uri("/api/schedule")
+                .bodyValue(dtoNewEntry)
+                .exchange()
+                .expectStatus().is5xxServerError();
+
+    }
+
 }
