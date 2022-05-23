@@ -22,7 +22,6 @@ public class ScheduleEntryService {
        return scheduleEntryRepository.findAll();
     }
 
-
     public ScheduleEntry addNewScheduleEntry(DtoNewScheduleEntry dtoNewScheduleEntry) {
 
         try {
