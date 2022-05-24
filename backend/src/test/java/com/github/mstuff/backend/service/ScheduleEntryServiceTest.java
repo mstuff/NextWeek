@@ -109,7 +109,6 @@ class ScheduleEntryServiceTest {
         //WHEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
-
                 .entryDummyDate("21.05.2022")
                 .build();
 
@@ -126,7 +125,6 @@ class ScheduleEntryServiceTest {
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
-
                 .build();
 
         //THEN

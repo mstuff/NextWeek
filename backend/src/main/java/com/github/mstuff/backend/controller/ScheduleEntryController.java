@@ -20,14 +20,13 @@ public class ScheduleEntryController {
     }
 
     @GetMapping
-    public List<ScheduleEntry> getAllScheduleEntries(){
+    public List<ScheduleEntry> getAllScheduleEntries() {
         return scheduleEntryService.getAllScheduleEntries();
     }
 
     @PostMapping
-    public ScheduleEntry addNewScheduleEntry (@RequestBody DtoNewScheduleEntry dtoNewScheduleEntry){
+    public ScheduleEntry addNewScheduleEntry(@RequestBody DtoNewScheduleEntry dtoNewScheduleEntry) {
         return scheduleEntryService.addNewScheduleEntry(dtoNewScheduleEntry);
     }
-
 
 }
