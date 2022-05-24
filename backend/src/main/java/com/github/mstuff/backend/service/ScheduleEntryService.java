@@ -35,7 +35,7 @@ public class ScheduleEntryService {
             return scheduleEntryRepository.insert(newScheduleEntry);
 
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("There has been an invalid entry:", e);
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
