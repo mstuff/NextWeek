@@ -18,8 +18,8 @@ public class ScheduleEntryService {
         this.scheduleEntryRepository = scheduleEntryRepository;
     }
 
-    public List<ScheduleEntry> getAllScheduleEntries(){
-       return scheduleEntryRepository.findAll();
+    public List<ScheduleEntry> getAllScheduleEntries() {
+        return scheduleEntryRepository.findAll();
     }
 
     public ScheduleEntry addNewScheduleEntry(DtoNewScheduleEntry dtoNewScheduleEntry) {
@@ -35,17 +35,17 @@ public class ScheduleEntryService {
             return scheduleEntryRepository.insert(newScheduleEntry);
 
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("There has been an invalid entry:", e);
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
-    private void validateInput(DtoNewScheduleEntry dtoNewEntry) throws IllegalArgumentException{
+    private void validateInput(DtoNewScheduleEntry dtoNewEntry) {
 
-        if(dtoNewEntry.getTitle() == null){
+        if (dtoNewEntry.getTitle() == null) {
             throw new IllegalArgumentException("The title of the new entry was null");
-        } else if(dtoNewEntry.getDescription() == null){
+        } else if (dtoNewEntry.getDescription() == null) {
             throw new IllegalArgumentException("The description of the new entry was null");
-        } else if(dtoNewEntry.getEntryDummyDate() == null){
+        } else if (dtoNewEntry.getEntryDummyDate() == null) {
             throw new IllegalArgumentException("The date of the new entry was null");
         }
     }

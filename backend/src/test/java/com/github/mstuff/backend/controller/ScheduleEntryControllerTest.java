@@ -106,7 +106,7 @@ class ScheduleEntryControllerTest {
                 .uri("/api/schedule")
                 .bodyValue(dtoNewEntry)
                 .exchange()
-                .expectStatus().is5xxServerError();
+                .expectStatus().is4xxClientError();
 
     }
 }

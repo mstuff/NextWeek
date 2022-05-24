@@ -87,7 +87,7 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenNewEntryInvalid_shouldThrowException () {
+    void addNewScheduleEntry_whenNewEntryTitleIsNull_shouldThrowException () {
 
         //GIVEN
         //WHEN
@@ -95,6 +95,38 @@ class ScheduleEntryServiceTest {
 
                 .description("description1")
                 .entryDummyDate("21.05.2022")
+                .build();
+
+        //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.addNewScheduleEntry(dtoNewEntry));
+    }
+
+    @Test
+    void addNewScheduleEntry_whenNewEntryDescriptionIsNull_shouldThrowException () {
+
+        //GIVEN
+        //WHEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .title("Appointment1")
+
+                .entryDummyDate("21.05.2022")
+                .build();
+
+        //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.addNewScheduleEntry(dtoNewEntry));
+    }
+
+    @Test
+    void addNewScheduleEntry_whenNewEntryDummyDateIsNull_shouldThrowException () {
+
+        //GIVEN
+        //WHEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .title("Appointment1")
+                .description("description1")
+
                 .build();
 
         //THEN
