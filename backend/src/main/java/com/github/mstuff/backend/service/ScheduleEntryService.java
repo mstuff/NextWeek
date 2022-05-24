@@ -18,8 +18,8 @@ public class ScheduleEntryService {
         this.scheduleEntryRepository = scheduleEntryRepository;
     }
 
-    public List<ScheduleEntry> getAllScheduleEntries(){
-       return scheduleEntryRepository.findAll();
+    public List<ScheduleEntry> getAllScheduleEntries() {
+        return scheduleEntryRepository.findAll();
     }
 
     public ScheduleEntry addNewScheduleEntry(DtoNewScheduleEntry dtoNewScheduleEntry) {
@@ -39,13 +39,13 @@ public class ScheduleEntryService {
         }
     }
 
-    private void validateInput(DtoNewScheduleEntry dtoNewEntry) throws IllegalArgumentException{
+    private void validateInput(DtoNewScheduleEntry dtoNewEntry) throws IllegalArgumentException {
 
-        if(dtoNewEntry.getTitle() == null){
+        if (dtoNewEntry.getTitle() == null) {
             throw new IllegalArgumentException("The title of the new entry was null");
-        } else if(dtoNewEntry.getDescription() == null){
+        } else if (dtoNewEntry.getDescription() == null) {
             throw new IllegalArgumentException("The description of the new entry was null");
-        } else if(dtoNewEntry.getEntryDummyDate() == null){
+        } else if (dtoNewEntry.getEntryDummyDate() == null) {
             throw new IllegalArgumentException("The date of the new entry was null");
         }
     }
