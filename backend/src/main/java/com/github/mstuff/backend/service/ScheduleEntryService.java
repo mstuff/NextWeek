@@ -39,7 +39,7 @@ public class ScheduleEntryService {
         }
     }
 
-    private void validateInput(DtoNewScheduleEntry dtoNewEntry) throws IllegalArgumentException {
+    private void validateInput(DtoNewScheduleEntry dtoNewEntry) {
 
         if (dtoNewEntry.getTitle() == null) {
             throw new IllegalArgumentException("The title of the new entry was null");
