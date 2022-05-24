@@ -25,8 +25,8 @@ public class ScheduleEntryService {
     public ScheduleEntry addNewScheduleEntry(DtoNewScheduleEntry dtoNewScheduleEntry) {
 
         try {
-            ScheduleEntry newScheduleEntry = new ScheduleEntry();
             validateInput(dtoNewScheduleEntry);
+            ScheduleEntry newScheduleEntry = new ScheduleEntry();
 
             newScheduleEntry.setTitle(dtoNewScheduleEntry.getTitle());
             newScheduleEntry.setDescription(dtoNewScheduleEntry.getDescription());

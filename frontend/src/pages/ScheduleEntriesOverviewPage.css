@@ -1,0 +1,16 @@
+
+.overview-page-div-new-entry {
+    background-color: #A9C0D6;
+    color: #36413E;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.overview-page-div-list-of-entries {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
