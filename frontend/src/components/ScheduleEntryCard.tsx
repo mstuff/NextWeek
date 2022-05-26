@@ -10,6 +10,5 @@ export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProp
     return <div className={"schedule-entry-card"}>
         <div>{scheduleEntry.title}</div>
         <div>{scheduleEntry.description}</div>
-        <div>{scheduleEntry.entryDummyDate}</div>
     </div>
 }

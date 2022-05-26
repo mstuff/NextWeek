@@ -7,12 +7,14 @@ import Header from "./components/Header";
 import NavigationBar from "./components/NavigationBar";
 
 
+
 export default function App() {
 
     const {scheduleEntries, addScheduleEntry} = useScheduleEntries();
 
 
     return (
+
         <div className="App">
             <BrowserRouter>
                 <div>
