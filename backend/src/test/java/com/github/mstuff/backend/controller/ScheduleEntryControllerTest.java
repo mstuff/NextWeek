@@ -25,7 +25,7 @@ class ScheduleEntryControllerTest {
     private ScheduleEntryRepository scheduleEntryRepository;
 
     @BeforeEach
-    public void cleanUp(){
+    public void cleanUp() {
         scheduleEntryRepository.deleteAll();
     }
 
@@ -37,7 +37,8 @@ class ScheduleEntryControllerTest {
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate("1")
+                .entryTime("2")
                 .build();
         scheduleEntryRepository.insert(scheduleEntry1);
 
@@ -55,21 +56,22 @@ class ScheduleEntryControllerTest {
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate("1")
+                .entryTime("2")
                 .build());
 
         assertEquals(expected, actual);
-
     }
 
     @Test
-    void addNewScheduleEntry_shouldReturnTheNewScheduleEntry(){
+    void addNewScheduleEntry_shouldReturnTheNewScheduleEntry() {
 
         //GIVEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate("1")
+                .entryTime("2")
                 .build();
 
         //WHEN
@@ -87,18 +89,19 @@ class ScheduleEntryControllerTest {
         assertNotNull(actual.getId());
         assertEquals("Appointment1", actual.getTitle());
         assertEquals("description1", actual.getDescription());
-        assertEquals("21.05.2022", actual.getEntryDummyDate());
+        assertEquals("1", actual.getEntryDate());
+        assertEquals("2", actual.getEntryTime());
         assertEquals(24, actual.getId().length());
-
     }
 
     @Test
-    void addNewScheduleEntry_whenMissingField_shouldThrowIllegalArgumentException(){
+    void addNewScheduleEntry_whenMissingField_shouldThrowIllegalArgumentException() {
 
         //GIVEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate("1")
+                .entryTime("2")
                 .build();
 
         //WHEN //THEN

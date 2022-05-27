@@ -14,6 +14,7 @@ public class DtoNewScheduleEntry {
 
     private String title;
     private String description;
-    private String entryDummyDate;
+    private String entryDate;
+    private String entryTime;
 
 }

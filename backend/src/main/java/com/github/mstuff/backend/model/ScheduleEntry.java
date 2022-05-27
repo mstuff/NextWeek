@@ -19,6 +19,7 @@ public class ScheduleEntry {
     private String id;
     private String title;
     private String description;
-    private String entryDummyDate;
+    private String entryDate;
+    private String entryTime;
 
 }
