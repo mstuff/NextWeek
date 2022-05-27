@@ -50,6 +50,11 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
         setEntryTime(null);
     }
 
+    const renderInput = (params: any) => <TextField
+        {...params}
+        variant={"standard"}
+    />
+
     return (
         <div>
             <form onSubmit={onAdd}
@@ -69,33 +74,24 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         label="Start date"
                         mask={"__.__.____"}
                         value={entryDate}
-
                         inputFormat={"dd.MM.yyyy"}
                         onChange={(newValue) => {
                             setEntryDate((newValue));
                             console.log(newValue);
                         }}
-                        renderInput={(params) => <TextField
-                            {...params}
-                            variant={"standard"}
-                        />}
+                        renderInput={renderInput}
                     />
                     <DesktopTimePicker
                         label="Start time"
                         mask={"__:__"}
                         value={entryTime}
-
                         inputFormat={"HH:mm"}
                         disableOpenPicker={true}
                         onChange={(newValue) => {
                             setEntryTime((newValue));
                             console.log(newValue);
                         }}
-                        renderInput={(params) => <TextField
-                            {...params}
-                            variant={"standard"}
-
-                        />}
+                        renderInput={renderInput}
                     />
                 </LocalizationProvider>
                 <input className={"new-entry-add-button"}

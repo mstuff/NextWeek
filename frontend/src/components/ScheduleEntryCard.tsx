@@ -10,5 +10,8 @@ export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProp
     return <div className={"schedule-entry-card"}>
         <div>{scheduleEntry.title}</div>
         <div>{scheduleEntry.description}</div>
+        <div>{new Date (scheduleEntry.entryDate).toLocaleDateString()}</div>
+        <div>{new Date (scheduleEntry.entryTime).toLocaleTimeString()}</div>
+
     </div>
 }
