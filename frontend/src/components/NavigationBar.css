@@ -1,5 +1,12 @@
 
 .navigation-bar{
-    background-color: #A9C0D6;
-
+    background-color: #565656;
+    color: #82A3A1;
 }
+
+.nav-link{
+    background-color: #565656;
+    color: #82A3A1;
+    text-decoration: none;
+}
+

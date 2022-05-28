@@ -4,8 +4,10 @@ import './NavigationBar.css'
 export default function NavigationBar(){
     return (
         <div className={'navigation-bar'}>
-            <NavLink to={"/overview"}>
-                Start
+            <NavLink
+                className={"nav-link"}
+                to={"/overview"}>
+                <p>Overview</p>
             </NavLink>
         </div>
     )

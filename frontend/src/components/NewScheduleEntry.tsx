@@ -56,9 +56,8 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
     />
 
     return (
-        <div>
-            <form onSubmit={onAdd}
-                  className={"new-entry-form"}>
+        <div className={"new-entry-form"}>
+            <form onSubmit={onAdd}>
                 <input className={"new-entry-input-field"}
                        type={"text"}
                        placeholder={"Title"}
@@ -97,4 +96,7 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             </form>
         </div>
     )
+
+
 }
+
