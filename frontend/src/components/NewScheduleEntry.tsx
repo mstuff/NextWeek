@@ -77,7 +77,6 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         inputFormat={"dd.MM.yyyy"}
                         onChange={(newValue) => {
                             setEntryDate((newValue));
-                            console.log(newValue);
                         }}
                         renderInput={renderInput}
                     />
@@ -89,7 +88,6 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         disableOpenPicker={true}
                         onChange={(newValue) => {
                             setEntryTime((newValue));
-                            console.log(newValue);
                         }}
                         renderInput={renderInput}
                     />
