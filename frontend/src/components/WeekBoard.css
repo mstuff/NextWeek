@@ -1,10 +1,7 @@
 
-
-
 .week-board-outer{
     display: flex;
     flex-direction: row;
-
     overflow: auto;
     scroll-behavior: smooth;
 }
