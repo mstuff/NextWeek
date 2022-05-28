@@ -5,6 +5,7 @@ import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.junit.jupiter.api.Test;
 
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -16,6 +17,7 @@ class ScheduleEntryServiceTest {
     private final ScheduleEntryRepository scheduleEntryRepository = mock(ScheduleEntryRepository.class);
     private final ScheduleEntryService scheduleEntryService = new ScheduleEntryService(scheduleEntryRepository);
 
+
     @Test
     void getAllAppointments_whenAtLeastOneAppointmentInDB_shouldReturnListWithAtLeastOneElement() {
 
@@ -24,7 +26,8 @@ class ScheduleEntryServiceTest {
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         when(scheduleEntryRepository.findAll())
@@ -41,7 +44,8 @@ class ScheduleEntryServiceTest {
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build());
 
         verify(scheduleEntryRepository).findAll();
@@ -55,21 +59,24 @@ class ScheduleEntryServiceTest {
         ScheduleEntry newEntry1 = ScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
         when(scheduleEntryRepository.insert(newEntry1))
                 .thenReturn(ScheduleEntry.builder()
                         .id("123-test")
                         .title("Appointment1")
                         .description("description1")
-                        .entryDummyDate("21.05.2022")
+                        .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                        .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                         .build());
 
         //WHEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         ScheduleEntry actual = scheduleEntryService.addNewScheduleEntry(dtoNewEntry);
@@ -79,7 +86,8 @@ class ScheduleEntryServiceTest {
                 .id("123-test")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         verify(scheduleEntryRepository).insert(newEntry1);
@@ -94,7 +102,8 @@ class ScheduleEntryServiceTest {
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
 
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         //THEN
@@ -110,7 +119,8 @@ class ScheduleEntryServiceTest {
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
 
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         //THEN
@@ -119,13 +129,31 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenNewEntryDummyDateIsNull_shouldThrowException () {
+    void addNewScheduleEntry_whenNewEntryDateIsNull_shouldThrowException () {
 
         //GIVEN
         //WHEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
+
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .build();
+
+        //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.addNewScheduleEntry(dtoNewEntry));
+    }
+
+    @Test
+    void addNewScheduleEntry_whenNewEntryTimeIsNull_shouldThrowException () {
+
+        //GIVEN
+        //WHEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .title("Appointment1")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
 
                 .build();
 

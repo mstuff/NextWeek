@@ -1,5 +1,6 @@
 package com.github.mstuff.backend.controller.status;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +11,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import java.time.LocalDateTime;
 
+@Slf4j
 @ControllerAdvice
 public class ControllerAdvisor extends ResponseEntityExceptionHandler {
 
@@ -21,6 +23,8 @@ public class ControllerAdvisor extends ResponseEntityExceptionHandler {
                 .timeStamp(LocalDateTime.now())
                 .requestUri(request.getDescription(false))
                 .build();
+
+        log.error("There was an illegal argument in the request", ex);
 
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }

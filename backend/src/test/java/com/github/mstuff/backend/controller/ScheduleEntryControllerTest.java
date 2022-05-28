@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
+import java.time.Instant;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -25,7 +26,7 @@ class ScheduleEntryControllerTest {
     private ScheduleEntryRepository scheduleEntryRepository;
 
     @BeforeEach
-    public void cleanUp(){
+    public void cleanUp() {
         scheduleEntryRepository.deleteAll();
     }
 
@@ -37,7 +38,8 @@ class ScheduleEntryControllerTest {
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
         scheduleEntryRepository.insert(scheduleEntry1);
 
@@ -55,21 +57,22 @@ class ScheduleEntryControllerTest {
                 .id("123")
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build());
 
         assertEquals(expected, actual);
-
     }
 
     @Test
-    void addNewScheduleEntry_shouldReturnTheNewScheduleEntry(){
+    void addNewScheduleEntry_shouldReturnTheNewScheduleEntry() {
 
         //GIVEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         //WHEN
@@ -87,18 +90,40 @@ class ScheduleEntryControllerTest {
         assertNotNull(actual.getId());
         assertEquals("Appointment1", actual.getTitle());
         assertEquals("description1", actual.getDescription());
-        assertEquals("21.05.2022", actual.getEntryDummyDate());
+        assertEquals(Instant.parse("2022-05-28T22:00:00.000Z"), actual.getEntryDate());
+        assertEquals(Instant.parse("2022-05-28T22:10:00.000Z"), actual.getEntryTime());
         assertEquals(24, actual.getId().length());
-
     }
 
     @Test
-    void addNewScheduleEntry_whenMissingField_shouldThrowIllegalArgumentException(){
+    void addNewScheduleEntry_whenMissingTitle_shouldThrowIllegalArgumentException() {
 
         //GIVEN
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .description("description1")
-                .entryDummyDate("21.05.2022")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .build();
+
+        //WHEN //THEN
+        webTestClient.post()
+
+                .uri("/api/schedule")
+                .bodyValue(dtoNewEntry)
+                .exchange()
+                .expectStatus().is4xxClientError();
+
+    }
+
+    @Test
+    void addNewScheduleEntry_whenMissingDescription_shouldThrowIllegalArgumentException() {
+
+        //GIVEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .title("Title1")
+
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
                 .build();
 
         //WHEN //THEN
@@ -109,4 +134,26 @@ class ScheduleEntryControllerTest {
                 .expectStatus().is4xxClientError();
 
     }
+
+    @Test
+    void addNewScheduleEntry_whenMissingEntryDate_shouldThrowIllegalArgumentException() {
+
+        //GIVEN
+        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+                .title("Title1")
+                .description("Description")
+
+                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .build();
+
+        //WHEN //THEN
+        webTestClient.post()
+                .uri("/api/schedule")
+                .bodyValue(dtoNewEntry)
+                .exchange()
+                .expectStatus().is4xxClientError();
+
+    }
+
+
 }
