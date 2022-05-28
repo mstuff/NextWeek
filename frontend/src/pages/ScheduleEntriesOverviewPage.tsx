@@ -3,6 +3,7 @@ import ListOfScheduleEntries from "../components/ListOfScheduleEntries";
 import NewScheduleEntry from "../components/NewScheduleEntry";
 
 import "./ScheduleEntriesOverviewPage.css"
+import WeekBoard from "../components/WeekBoard";
 
 type ScheduleEntriesOverviewPageProps = {
     scheduleEntries: ScheduleEntry [];
@@ -15,6 +16,9 @@ export default function ScheduleEntriesOverviewPage({
                                                     }: ScheduleEntriesOverviewPageProps) {
 
     return <div>
+        <div>
+            <WeekBoard/>
+        </div>
         <div className={"container"}>
         <div className={"overview-page-div-new-entry"}>
             <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
