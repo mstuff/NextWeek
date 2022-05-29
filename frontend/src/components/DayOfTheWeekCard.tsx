@@ -1,9 +1,13 @@
 import "./DayOfTheWeekCard.css"
 
-export default function DayOfTheWeekCard (){
+type DayOfTheWeekProps = {
+    selectedDay: Date;
+}
+
+export default function DayOfTheWeekCard ({selectedDay}: DayOfTheWeekProps){
 
     return <div className={"day-of-the-week-card"}>
-        Day
+        {new Date(selectedDay).toLocaleDateString()}
     </div>
 
 }

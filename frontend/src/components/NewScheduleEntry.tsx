@@ -62,12 +62,12 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                        type={"text"}
                        placeholder={"Title"}
                        value={title}
-                       onChange={event => setTitle(event.target.value)}/>
+                       onChange={event => event && setTitle(event.target.value)}/>
                 <input className={"new-entry-input-field"}
                        type={"text"}
                        placeholder={"Description"}
                        value={description}
-                       onChange={event => setDescription(event.target.value)}/>
+                       onChange={event => event && setDescription(event.target.value)}/>
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                     <DesktopDatePicker
                         label="Start date"
@@ -96,7 +96,4 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             </form>
         </div>
     )
-
-
 }
-
