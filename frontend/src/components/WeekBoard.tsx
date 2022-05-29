@@ -63,8 +63,6 @@ export default function WeekBoard() {
                     {selectedWeek.map(day => <DayOfTheWeekCard selectedDay={day}/>)}
                 </div>
             </div>
-
         </div>
     )
-
 }

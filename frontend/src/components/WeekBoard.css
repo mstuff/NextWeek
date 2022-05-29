@@ -1,12 +1,12 @@
 
-.week-board-outer{
+.week-board-outer {
     display: flex;
     flex-direction: row;
     overflow: auto;
     scroll-behavior: smooth;
 }
 
-.week-board-inner{
+.week-board-inner {
     display: flex;
     flex-direction: row;
 }
