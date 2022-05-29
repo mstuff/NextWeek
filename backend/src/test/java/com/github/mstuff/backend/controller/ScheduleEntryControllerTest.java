@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.HttpStatus;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.time.Instant;
@@ -111,7 +112,7 @@ class ScheduleEntryControllerTest {
                 .uri("/api/schedule")
                 .bodyValue(dtoNewEntry)
                 .exchange()
-                .expectStatus().is4xxClientError();
+                .expectStatus().isEqualTo(400);
 
     }
 
@@ -131,7 +132,7 @@ class ScheduleEntryControllerTest {
                 .uri("/api/schedule")
                 .bodyValue(dtoNewEntry)
                 .exchange()
-                .expectStatus().is4xxClientError();
+                .expectStatus().isEqualTo(400);
 
     }
 
@@ -151,7 +152,7 @@ class ScheduleEntryControllerTest {
                 .uri("/api/schedule")
                 .bodyValue(dtoNewEntry)
                 .exchange()
-                .expectStatus().is4xxClientError();
+                .expectStatus().isEqualTo(400);
 
     }
 

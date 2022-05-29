@@ -56,9 +56,8 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
     />
 
     return (
-        <div>
-            <form onSubmit={onAdd}
-                  className={"new-entry-form"}>
+        <div className={"new-entry-form"}>
+            <form onSubmit={onAdd}>
                 <input className={"new-entry-input-field"}
                        type={"text"}
                        placeholder={"Title"}
@@ -77,7 +76,6 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         inputFormat={"dd.MM.yyyy"}
                         onChange={(newValue) => {
                             setEntryDate((newValue));
-                            console.log(newValue);
                         }}
                         renderInput={renderInput}
                     />
@@ -89,7 +87,6 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         disableOpenPicker={true}
                         onChange={(newValue) => {
                             setEntryTime((newValue));
-                            console.log(newValue);
                         }}
                         renderInput={renderInput}
                     />
@@ -99,4 +96,7 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             </form>
         </div>
     )
+
+
 }
+

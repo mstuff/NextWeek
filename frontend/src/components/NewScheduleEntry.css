@@ -1,21 +1,125 @@
 
 .new-entry-form {
-
     color: #36413E;
     width: 200px;
     padding: 10px;
 }
 
 .new-entry-input-field {
+    background-color: #565656;
+    color: #82A3A1;
+
+    font-family: -apple-system,   'Helvetica Neue', sans-serif;;
+    font-size: 1rem;
+    font-weight: normal;
+    line-height: 1.4375em;
+
     width: 200px;
     padding: 10px;
     margin: 5px 0 5px;
-    border-radius: 5px;
+    border: none;
+    border-bottom: 2px solid #82A3A1;
 }
 
 .new-entry-add-button {
+    background-color: #565656;
+    color: #82A3A1;
+
     width: 100px;
     padding: 5px;
-    margin: 5px 0 5px;
+    margin: 20px 0 5px;
     border-radius: 5px;
+    border-color:  #82A3A1;
+}
+
+.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
+    background-color: #565656 !important;
+    color: #82A3A1 !important;
+    width: 200px !important;
+}
+
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root::before {
+    color: #82A3A1 !important;
+    border-bottom: 2px solid #82A3A1 !important;
+    }
+
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root {
+    color: #82A3A1 !important;
+}
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+    background-color: #c1e0de !important;
+    color: #565656 !important;
+}
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+    background-color: #82A3A1 !important;
+    color: #565656 !important;
+}
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root{
+    background-color: #565656 !important;
+    color:   #82A3A1 !important;
+}
+
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected){
+    background-color: #565656 !important;
+    color:   #82A3A1 !important;
+    border: 1px solid #82A3A1 !important;
+}
+
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected{
+    background-color:   #82A3A1 !important;
+    color: #565656  !important;
+}
+
+.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover{
+    will-change: background-color;
+    background-color: #97b9b7 !important;
+}
+
+.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root:hover{
+    background-color: #666666 !important;
+}
+
+.css-1dozdou{
+    background-color: #82A3A1 !important;
+    color:  #565656 !important;
+}
+
+.css-1n2mv2k{
+    background-color: #82A3A1 !important;
+    color:  #565656 !important;
+}
+
+.css-169iwlq-MuiCalendarPicker-root{
+    background-color: #82A3A1 !important;
+}
+
+.css-dhopo2{
+    background-color: #565656 !important;
+}
+
+.css-i4bv87-MuiSvgIcon-root {
+    color: #82A3A1 !important;
+}
+
+.css-1x51dt5-MuiInputBase-input-MuiInput-input {
+    color: #82A3A1 !important;
+}
+
+.css-1ptx2yq-MuiInputBase-root-MuiInput-root {
+    color: #82A3A1 !important;
+}
+
+.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
+    color: #82A3A1 !important;
+}
+
+.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root {
+    color: #82A3A1 !important;
+}
+
+.css-1laqsz7-MuiInputAdornment-root {
+    fill: #82A3A1;
 }
