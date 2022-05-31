@@ -32,11 +32,6 @@
     border-color: #82A3A1;
 }
 
-.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin {
-    background-color: #6C7D7C;
-    color: #565656;
-}
-
 .MuiFormControl-root.MuiTextField-root {
     background-color: #565656;
     color: #82A3A1;
