@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {Route, Routes} from "react-router-dom";
 import ScheduleEntriesOverviewPage from "./pages/ScheduleEntriesOverviewPage";
 import useScheduleEntries from "./hooks/useScheduleEntries";
 import Header from "./components/Header";
@@ -16,7 +16,6 @@ export default function App() {
     return (
 
         <div className="App">
-            <BrowserRouter>
                 <div>
                     <Header/>
                     <NavigationBar/>
@@ -27,7 +26,6 @@ export default function App() {
                         />
                     </Routes>
                 </div>
-            </BrowserRouter>
         </div>
     );
 }
