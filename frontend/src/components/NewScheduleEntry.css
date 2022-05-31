@@ -32,95 +32,130 @@
     border-color: #82A3A1;
 }
 
-
-.css-1u3bzj6-MuiFormControl-root-MuiTextField-root {
-    background-color: #565656 !important;
-    color: #82A3A1 !important;
-    width: 200px !important;
+.MuiFormControl-root.MuiTextField-root {
+    background-color: #565656;
+    color: #82A3A1;
+    width: 200px;
 }
 
-.css-1ptx2yq-MuiInputBase-root-MuiInput-root::before {
-    color: #82A3A1 !important;
-    border-bottom: 2px solid #82A3A1 !important;
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl::before {
+    color: #82A3A1;
+    border-bottom: 2px solid #82A3A1;
 }
 
-.css-1ptx2yq-MuiInputBase-root-MuiInput-root {
-    color: #82A3A1 !important;
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl {
+    color: #82A3A1;
 }
 
-.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
-    background-color: #c1e0de !important;
-    color: #565656 !important;
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.Mui-selected:hover {
+    background-color: #869f9d;
+    color: #333333;
 }
 
-.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-    background-color: #82A3A1 !important;
-    color: #565656 !important;
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin:hover {
+    background-color: #6C7D7C;
+    color: #333333;
 }
 
-.css-bkrceb-MuiButtonBase-root-MuiPickersDay-root {
-    background-color: #565656 !important;
-    color: #82A3A1 !important;
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.Mui-selected {
+    background-color: #82A3A1;
+    color: #333333;
 }
 
-.css-195y93z-MuiButtonBase-root-MuiPickersDay-root:not(.Mui-selected) {
-    background-color: #565656 !important;
-    color: #82A3A1 !important;
-    border: 1px solid #82A3A1 !important;
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin {
+    background-color: #565656;
+    color: #82A3A1;
 }
 
-.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected {
-    background-color: #82A3A1 !important;
-    color: #565656 !important;
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today:not(.Mui-selected) {
+    background-color: #565656;
+    color: #82A3A1;
+    border: 1px solid #82A3A1;
 }
 
-.css-195y93z-MuiButtonBase-root-MuiPickersDay-root.Mui-selected:hover {
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today:not(.Mui-selected):hover {
+    background-color: #6C7D7C;
+    color: #333333;
+    border: 1px solid #82A3A1;
+}
+
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today.Mui-selected {
+    background-color: #82A3A1;
+    color: #565656;
+}
+
+.MuiButtonBase-root.MuiPickersDay-root.MuiPickersDay-dayWithMargin.MuiPickersDay-today.Mui-selected:hover {
     will-change: background-color;
-    background-color: #97b9b7 !important;
+    background-color: #97b9b7;
 }
 
 .css-bkrceb-MuiButtonBase-root-MuiPickersDay-root:hover {
-    background-color: #666666 !important;
+    background-color: #666666;
 }
 
 .css-1dozdou {
-    background-color: #82A3A1 !important;
-    color: #565656 !important;
+    background-color: #82A3A1;
+    color: #565656;
 }
 
 .css-1n2mv2k {
-    background-color: #82A3A1 !important;
-    color: #565656 !important;
+    background-color: #82A3A1;
+    color: #565656;
 }
 
-.css-169iwlq-MuiCalendarPicker-root {
-    background-color: #82A3A1 !important;
+.MuiCalendarPicker-root {
+    background-color: #82A3A1;
 }
 
-.css-dhopo2 {
-    background-color: #565656 !important;
+.PrivatePickersSlideTransition-root {
+    background-color: #565656;
 }
 
-.css-i4bv87-MuiSvgIcon-root {
-    color: #82A3A1 !important;
+.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium {
+    color: #82A3A1;
 }
 
-.css-1x51dt5-MuiInputBase-input-MuiInput-input {
-    color: #82A3A1 !important;
+.MuiInput-input.MuiInputBase-input.MuiInputBase-inputAdornedEnd {
+    color: #82A3A1;
 }
 
-.css-1ptx2yq-MuiInputBase-root-MuiInput-root {
-    color: #82A3A1 !important;
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd {
+    color: #82A3A1;
 }
 
-.css-aqpgxn-MuiFormLabel-root-MuiInputLabel-root {
-    color: #82A3A1 !important;
+.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-standard.MuiFormLabel-root.MuiFormLabel-colorPrimary {
+    color: #82A3A1;
 }
 
-.css-1c2i806-MuiFormLabel-root-MuiInputLabel-root {
-    color: #82A3A1 !important;
+.MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-shrink.MuiInputLabel-standard.MuiFormLabel-root.MuiFormLabel-colorPrimary.MuiFormLabel-filled {
+    color: #82A3A1;
 }
 
-.css-1laqsz7-MuiInputAdornment-root {
+.MuiInputAdornment-root.MuiInputAdornment-positionEnd.MuiInputAdornment-standard.MuiInputAdornment-sizeMedium {
     fill: #82A3A1;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
+    background-color: #565656;
+    color: #82A3A1;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
+    background-color: #565656;
+    color: #82A3A1;
+}
+
+.PrivatePickersYear-root.PrivatePickersYear-modeDesktop  {
+    background-color: #82A3A1;
+    color: #565656;
+}
+
+.PrivatePickersYear-yearButton.Mui-selected.css-m1gykc {
+    background-color: #565656;
+    color: #82A3A1;
+}
+
+.PrivatePickersYear-yearButton.Mui-selected.css-m1gykc:hover {
+    background-color: #6C7D7C;
+    color: #333333;
 }
