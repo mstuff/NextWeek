@@ -17,7 +17,7 @@ export default function ScheduleEntriesOverviewPage({
 
     return <div>
         <div>
-            <WeekBoard/>
+            <WeekBoard scheduleEntries={scheduleEntries}/>
         </div>
         <div className={"container"}>
         <div className={"overview-page-div-new-entry"}>
