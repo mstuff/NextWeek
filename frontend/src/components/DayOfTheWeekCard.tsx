@@ -1,6 +1,6 @@
 import "./DayOfTheWeekCard.css"
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import TimescaleOfScheduleEntries from "./TimescaleOfScheduleEntries";
+import TimescaleBoard from "./TimescaleBoard";
 
 type DayOfTheWeekProps = {
     scheduleEntries: ScheduleEntry [];
@@ -22,7 +22,7 @@ export default function DayOfTheWeekCard({selectedDay, scheduleEntries}: DayOfTh
                 </p>
             </div>
             <div className={"calender-board"}>
-                <TimescaleOfScheduleEntries scheduleEntries={scheduleEntries}/>
+                <TimescaleBoard scheduleEntries={scheduleEntries}/>
             </div>
         </div>
     )

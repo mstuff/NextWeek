@@ -1,5 +1,6 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import "./TimescaleEntryCard.css"
+import "./TimescaleEntryCard.css";
+import {CSSProperties} from "react";
 
 
 type TimescaleEntryCardProps = {
@@ -8,13 +9,22 @@ type TimescaleEntryCardProps = {
 
 export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardProps) {
 
-const percent:string = "60%"
+    const minutesPerDay: number = 24 * 60;
 
+    const minutesEntered: number =
+        new Date(scheduleEntry.entryTime).getHours() * 60 +
+        new Date(scheduleEntry.entryTime).getMinutes();
 
+    const relativePosition: number = (100 * minutesEntered) / minutesPerDay;
+    const getPercentFromMinutes: string = relativePosition.toString() + "%";
+
+    const positionOnTimescale: CSSProperties = {
+        top: getPercentFromMinutes
+    };
 
     return (
         <div className={"timescale-entry-card"}
-        style={{top: percent}}>
+             style={positionOnTimescale}>
             <div>{scheduleEntry.title}</div>
             <div>
                 {new Date(scheduleEntry.entryDate)

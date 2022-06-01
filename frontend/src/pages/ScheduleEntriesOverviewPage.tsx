@@ -20,9 +20,9 @@ export default function ScheduleEntriesOverviewPage({
             <WeekBoard scheduleEntries={scheduleEntries}/>
         </div>
         <div className={"container"}>
-        <div className={"overview-page-div-new-entry"}>
-            <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
-        </div>
+            <div className={"overview-page-div-new-entry"}>
+                <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
+            </div>
         </div>
         <div className={"overview-page-div-list-of-entries"}>
             <ListOfScheduleEntries scheduleEntries={scheduleEntries}/>
