@@ -13,13 +13,13 @@ export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProp
         <div>{scheduleEntry.description}</div>
         <div>
             {new Date(scheduleEntry.entryDate)
-                .toLocaleDateString('de-DE', {day: "numeric", month: "2-digit", year: "numeric"})}
+                .toLocaleDateString('de-DE', {day: "2-digit", month: "2-digit", year: "numeric"})}
         </div>
         <div>
             {new Date(scheduleEntry.entryTime)
                 .toLocaleTimeString('de-DE', {hour: "2-digit", minute: "2-digit"})}
         </div>
-        <div>{new Date(scheduleEntry.entryTime)
+        <div>{new Date(scheduleEntry.entryDate)
             .toLocaleDateString("en-US", {weekday: "short"})}
         </div>
     </div>

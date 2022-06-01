@@ -6,9 +6,13 @@ import {DesktopDatePicker} from "@mui/x-date-pickers";
 import * as React from "react";
 import {FormEvent, useState} from "react";
 import TextField from "@mui/material/TextField";
+import {ScheduleEntry} from "../model/ScheduleEntry";
 
+type WeekBoardProps = {
+    scheduleEntries: ScheduleEntry [];
+}
 
-export default function WeekBoard() {
+export default function WeekBoard({scheduleEntries}: WeekBoardProps) {
 
     const [selectedDay, setSelectedDay] = useState<Date>(new Date());
     const [selectedWeek, setSelectedWeek] = useState<Date []>([]);
@@ -60,7 +64,12 @@ export default function WeekBoard() {
             </div>
             <div className={"week-board-outer"}>
                 <div className={"week-board-inner"}>
-                    {selectedWeek.map(day => <DayOfTheWeekCard selectedDay={day}/>)}
+                    {selectedWeek.map(day => <DayOfTheWeekCard
+                        scheduleEntries={scheduleEntries
+                            .filter(entry => new Date(entry.entryDate).toLocaleDateString() === new Date(day).toLocaleDateString())}
+                        selectedDay={day}
+                        key={day.toLocaleDateString()}
+                    />)}
                 </div>
             </div>
         </div>
