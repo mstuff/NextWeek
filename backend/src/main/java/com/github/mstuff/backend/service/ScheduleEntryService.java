@@ -31,7 +31,7 @@ public class ScheduleEntryService {
             newScheduleEntry.setTitle(dtoNewScheduleEntry.getTitle());
             newScheduleEntry.setDescription(dtoNewScheduleEntry.getDescription());
             newScheduleEntry.setEntryDate(dtoNewScheduleEntry.getEntryDate());
-            newScheduleEntry.setEntryTime(dtoNewScheduleEntry.getEntryTime());
+            newScheduleEntry.setDurationInMinutes(dtoNewScheduleEntry.getDurationInMinutes());
 
             return scheduleEntryRepository.insert(newScheduleEntry);
 
@@ -48,8 +48,8 @@ public class ScheduleEntryService {
             throw new IllegalArgumentException("The description of the new entry was null");
         } else if (dtoNewEntry.getEntryDate() == null) {
             throw new IllegalArgumentException("The date of the new entry was null");
-        }else if (dtoNewEntry.getEntryTime() == null) {
-            throw new IllegalArgumentException("The time of the new entry was null");
+        }else if (dtoNewEntry.getDurationInMinutes() == null) {
+            throw new IllegalArgumentException("The duration of the new entry was null");
         }
     }
 }

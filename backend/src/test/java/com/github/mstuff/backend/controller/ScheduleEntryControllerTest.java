@@ -48,7 +48,8 @@ class ScheduleEntryControllerTest {
                 .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
                 .durationInMinutes(600)
                 .build();
-        scheduleEntryRepository.insert(scheduleEntry1, scheduleEntry2);
+        scheduleEntryRepository.insert(scheduleEntry1);
+        scheduleEntryRepository.insert(scheduleEntry2);
 
         //WHEN
         List<ScheduleEntry> actual = webTestClient.get()
@@ -105,7 +106,7 @@ class ScheduleEntryControllerTest {
         assertEquals("Appointment1", actual.getTitle());
         assertEquals("description1", actual.getDescription());
         assertEquals(Instant.parse("2022-05-28T22:00:00.000Z"), actual.getEntryDate());
-        assertEquals(400, actual.getEntryTime());
+        assertEquals(400, actual.getDurationInMinutes());
         assertEquals(24, actual.getId().length());
     }
 
