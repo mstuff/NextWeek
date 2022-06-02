@@ -34,19 +34,23 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             alert(`Please enter a valid time!`);
             return;
         }
-        
+
         const patchedEntryDate: Date =
             new Date(entryDate.setHours(entryTime.getHours(),
                 entryTime.getMinutes())
             )
 
+        const durationInMinutes : number =
+            new Date (patchedEntryDate).getHours() * 60 +
+            new Date (patchedEntryDate).getMinutes()
+
+
         const newScheduleEntry: Omit<ScheduleEntry, "id"> = {
             title: title,
             description: description,
             entryDate: patchedEntryDate,
-            entryTime: entryTime
+            durationInMinutes: durationInMinutes
         }
-
 
         addScheduleEntry(newScheduleEntry);
 

@@ -12,8 +12,8 @@ export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardPr
     const minutesPerDay: number = 24 * 60;
 
     const minutesEntered: number =
-        new Date(scheduleEntry.entryTime).getHours() * 60 +
-        new Date(scheduleEntry.entryTime).getMinutes();
+        new Date(scheduleEntry.entryDate).getHours() * 60 +
+        new Date(scheduleEntry.entryDate).getMinutes();
 
     const relativePosition: number = (100 * minutesEntered) / minutesPerDay;
     const getPercentFromMinutes: string = relativePosition.toString() + "%";
@@ -31,7 +31,7 @@ export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardPr
                     .toLocaleDateString('de-DE', {day: "2-digit", month: "2-digit", year: "numeric"})}
             </div>
             <div>
-                {new Date(scheduleEntry.entryTime)
+                {new Date(scheduleEntry.entryDate)
                     .toLocaleTimeString('de-DE', {hour: "2-digit", minute: "2-digit"})}
             </div>
         </div>
