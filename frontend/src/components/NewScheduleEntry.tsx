@@ -35,12 +35,27 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             return;
         }
 
-        const newScheduleEntry: Omit<ScheduleEntry, "id"> = {
+        const scheduleEntryAsEntered: Omit<ScheduleEntry, "id"> = {
             title: title,
             description: description,
             entryDate: entryDate,
             entryTime: entryTime
         }
+
+        const patchedEntryDate : Date =
+            new Date(scheduleEntryAsEntered.entryDate
+                .setHours(scheduleEntryAsEntered.entryTime.getHours(),
+                    scheduleEntryAsEntered.entryTime.getMinutes())
+            )
+
+        const newScheduleEntry: Omit<ScheduleEntry, "id"> = {
+            title: title,
+            description: description,
+            entryDate: patchedEntryDate,
+            entryTime: entryTime
+        }
+
+
 
         addScheduleEntry(newScheduleEntry);
 
