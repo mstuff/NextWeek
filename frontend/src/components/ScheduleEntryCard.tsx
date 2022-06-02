@@ -22,6 +22,8 @@ export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProp
         <div>{new Date(scheduleEntry.entryDate)
             .toLocaleDateString("en-US", {weekday: "short"})}
         </div>
+        <div>Dauer in Minuten: {scheduleEntry.durationInMinutes}
+        </div>
     </div>
     )
 }
