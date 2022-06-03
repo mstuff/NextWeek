@@ -26,12 +26,7 @@ export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardPr
         <div className={"timescale-entry-card"}
              style={scaledPositionWithTime}>
             <div>{scheduleEntry.title}</div>
-            <div>{scheduleEntry.durationInMinutes}</div>
-            <div>
-                {new Date(scheduleEntry.entryDate)
-                    .toLocaleDateString('de-DE', {day: "2-digit", month: "2-digit", year: "numeric"})}
-            </div>
-            <div>
+            <div className={"time-info"}>Time:
                 {new Date(scheduleEntry.entryDate)
                     .toLocaleTimeString('de-DE', {hour: "2-digit", minute: "2-digit"})}
             </div>

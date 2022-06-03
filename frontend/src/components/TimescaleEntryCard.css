@@ -1,20 +1,23 @@
 
 .timescale-entry-card {
-    background-color: #565656;
+    background-color: transparent;
     color: #82A3A1;
 
     font-size: small;
+    font-weight: bolder;
 
     position: relative;
     display: inline-block;
-    float: right;
+    float: left;
+
+    width: 20px;
 
 
-
-
-    margin: 0 1.5% 0 1.5%;
-    border: 2pt solid #82A3A1;
-    border-radius: 5pt;
-
-    box-shadow: 5px 5px 10px #282c34;
 }
+
+.time-info {
+    font-size: smaller;
+    font-weight: normal;
+}
+
+

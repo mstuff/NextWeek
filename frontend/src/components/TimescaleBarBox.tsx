@@ -10,11 +10,9 @@ export default function TimescaleBarBox({scheduleEntries}: TimescaleBarBoxProps)
 
     return (
         <div className={"timescale-bar-box"}>
-                <div>
                 {scheduleEntries.map(entry =>
                     <EntryTimeScaleBar key={entry.id}
                                        scheduleEntry={entry}/>)}
-            </div>
         </div>
     )
 }

@@ -23,10 +23,10 @@ export default function DayOfTheWeekCard({selectedDay, scheduleEntries}: DayOfTh
                 </p>
             </div>
             <div className={"timescale-container"}>
-            <div className={"calender-board"}>
+            <div className={"calender-board-for-bars"}>
                 <TimescaleBarBox scheduleEntries={scheduleEntries}/>
             </div>
-            <div className={"calender-board"}>
+            <div className={"calender-board-for-cards"}>
                 <TimescaleBoard scheduleEntries={scheduleEntries}/>
             </div>
             </div>
