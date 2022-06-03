@@ -18,6 +18,7 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
     const [description, setDescription] = useState<string>('');
     const [entryDate, setEntryDate] = useState<Date | null>(null);
     const [entryTime, setEntryTime] = useState<Date | null>(null);
+    const [entryDuration, setEntryDuration] = useState<Date | null>(null);
 
     const onAdd = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -28,18 +29,31 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             alert(`Please enter a description!`);
             return;
         } else if (!entryDate) {
-            alert(`Please enter a valid date!`);
+            alert(`Please select a valid date!`);
             return;
         } else if (!entryTime) {
             alert(`Please enter a valid time!`);
             return;
+        } else if (!entryDuration) {
+            alert(`Please enter a duration!`);
+            return;
         }
+
+        const patchedEntryDate: Date =
+            new Date(entryDate.setHours(entryTime.getHours(),
+                entryTime.getMinutes())
+            )
+
+        const durationInMinutes: number =
+            new Date(entryDuration).getHours() * 60 +
+            new Date(entryDuration).getMinutes()
+
 
         const newScheduleEntry: Omit<ScheduleEntry, "id"> = {
             title: title,
             description: description,
-            entryDate: entryDate,
-            entryTime: entryTime
+            entryDate: patchedEntryDate,
+            durationInMinutes: durationInMinutes
         }
 
         addScheduleEntry(newScheduleEntry);
@@ -48,6 +62,7 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
         setDescription('');
         setEntryDate(null);
         setEntryTime(null);
+        setEntryDuration(null);
     }
 
     const renderInput = (params: any) => <TextField
@@ -87,6 +102,17 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         disableOpenPicker={true}
                         onChange={(newValue) => {
                             setEntryTime((newValue));
+                        }}
+                        renderInput={renderInput}
+                    />
+                    <DesktopTimePicker
+                        label="Select a duration"
+                        mask={"__:__"}
+                        value={entryDuration}
+                        inputFormat={"HH:mm"}
+                        disableOpenPicker={true}
+                        onChange={(newValue) => {
+                            setEntryDuration((newValue));
                         }}
                         renderInput={renderInput}
                     />

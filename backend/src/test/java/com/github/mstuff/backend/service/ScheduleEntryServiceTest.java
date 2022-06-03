@@ -27,7 +27,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         when(scheduleEntryRepository.findAll())
@@ -45,7 +45,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build());
 
         verify(scheduleEntryRepository).findAll();
@@ -60,7 +60,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
         when(scheduleEntryRepository.insert(newEntry1))
                 .thenReturn(ScheduleEntry.builder()
@@ -68,7 +68,7 @@ class ScheduleEntryServiceTest {
                         .title("Appointment1")
                         .description("description1")
                         .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                        .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                        .durationInMinutes(400)
                         .build());
 
         //WHEN
@@ -76,7 +76,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         ScheduleEntry actual = scheduleEntryService.addNewScheduleEntry(dtoNewEntry);
@@ -87,7 +87,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         verify(scheduleEntryRepository).insert(newEntry1);
@@ -103,7 +103,7 @@ class ScheduleEntryServiceTest {
 
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //THEN
@@ -120,7 +120,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
 
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //THEN
@@ -137,7 +137,7 @@ class ScheduleEntryServiceTest {
                 .title("Appointment1")
                 .description("description1")
 
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //THEN

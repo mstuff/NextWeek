@@ -7,7 +7,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.http.HttpStatus;
 import org.springframework.test.web.reactive.server.WebTestClient;
 
 import java.time.Instant;
@@ -40,9 +39,17 @@ class ScheduleEntryControllerTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+        ScheduleEntry scheduleEntry2 = ScheduleEntry.builder()
+                .id("456")
+                .title("Appointment2")
+                .description("description3")
+                .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
+                .durationInMinutes(600)
                 .build();
         scheduleEntryRepository.insert(scheduleEntry1);
+        scheduleEntryRepository.insert(scheduleEntry2);
 
         //WHEN
         List<ScheduleEntry> actual = webTestClient.get()
@@ -59,8 +66,15 @@ class ScheduleEntryControllerTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
-                .build());
+                .durationInMinutes(400)
+                .build(),
+                ScheduleEntry.builder()
+                        .id("456")
+                        .title("Appointment2")
+                        .description("description3")
+                        .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
+                        .durationInMinutes(600)
+                        .build());
 
         assertEquals(expected, actual);
     }
@@ -73,7 +87,7 @@ class ScheduleEntryControllerTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //WHEN
@@ -92,7 +106,7 @@ class ScheduleEntryControllerTest {
         assertEquals("Appointment1", actual.getTitle());
         assertEquals("description1", actual.getDescription());
         assertEquals(Instant.parse("2022-05-28T22:00:00.000Z"), actual.getEntryDate());
-        assertEquals(Instant.parse("2022-05-28T22:10:00.000Z"), actual.getEntryTime());
+        assertEquals(400, actual.getDurationInMinutes());
         assertEquals(24, actual.getId().length());
     }
 
@@ -103,7 +117,7 @@ class ScheduleEntryControllerTest {
         DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //WHEN //THEN
@@ -124,7 +138,7 @@ class ScheduleEntryControllerTest {
                 .title("Title1")
 
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //WHEN //THEN
@@ -144,7 +158,7 @@ class ScheduleEntryControllerTest {
                 .title("Title1")
                 .description("Description")
 
-                .entryTime(Instant.parse("2022-05-28T22:10:00.000Z"))
+                .durationInMinutes(400)
                 .build();
 
         //WHEN //THEN

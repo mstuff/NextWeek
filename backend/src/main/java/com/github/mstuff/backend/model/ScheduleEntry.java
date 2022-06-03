@@ -23,6 +23,6 @@ public class ScheduleEntry {
     private String title;
     private String description;
     private Instant entryDate;
-    private Instant entryTime;
+    private Integer durationInMinutes;
 
 }
