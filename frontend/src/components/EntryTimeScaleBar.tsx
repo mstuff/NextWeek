@@ -10,16 +10,14 @@ type TimescaleEntryBarProps = {
 
 export default function EntryTimeScaleBar({scheduleEntry}: TimescaleEntryBarProps) {
 
-
-
-    const scaledHeightAndPositionWithTimeBar: CSSProperties = {
+    const scaledHeightAndPositionWithTime: CSSProperties = {
         top: getPositionPercentFromEntryTime(scheduleEntry),
         height: getHeightPercentFromDuration(scheduleEntry)
     };
 
     return (
         <div className={"timescale-entry-bar"}
-             style={scaledHeightAndPositionWithTimeBar}>
+             style={scaledHeightAndPositionWithTime}>
         </div>
     )
 }
