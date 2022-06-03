@@ -11,10 +11,12 @@ export default function TimescaleBoard({scheduleEntries}: TimescaleBoardProps) {
 
     return (
         <div className={"timescale-board"}>
-            {scheduleEntries.map(entry =>
-                <TimescaleEntryCard key={entry.id}
-                                    scheduleEntry={entry}/>
-            )}
+            <div>
+                {scheduleEntries.map(entry =>
+                    <TimescaleEntryCard key={entry.id}
+                                        scheduleEntry={entry}/>
+                )}
+            </div>
         </div>
     )
 }

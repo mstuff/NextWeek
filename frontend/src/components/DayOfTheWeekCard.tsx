@@ -1,6 +1,7 @@
 import "./DayOfTheWeekCard.css"
 import {ScheduleEntry} from "../model/ScheduleEntry";
 import TimescaleBoard from "./TimescaleBoard";
+import TimescaleBarBox from "./TimescaleBarBox";
 
 type DayOfTheWeekProps = {
     scheduleEntries: ScheduleEntry [];
@@ -21,8 +22,13 @@ export default function DayOfTheWeekCard({selectedDay, scheduleEntries}: DayOfTh
                         .toLocaleDateString('de-DE', {day: "2-digit", month: "2-digit", year: "numeric"})}
                 </p>
             </div>
+            <div className={"timescale-container"}>
+            <div className={"calender-board"}>
+                <TimescaleBarBox scheduleEntries={scheduleEntries}/>
+            </div>
             <div className={"calender-board"}>
                 <TimescaleBoard scheduleEntries={scheduleEntries}/>
+            </div>
             </div>
         </div>
     )

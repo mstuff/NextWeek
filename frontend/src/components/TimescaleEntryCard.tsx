@@ -17,18 +17,16 @@ export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardPr
 
     const getPositionPercentFromEntryTime: string = ((100 * entryTimeInMinutes) / minutesPerDay)
         .toString() + "%";
-    const getHeightPercentFromDuration: string = ((100 * scheduleEntry.durationInMinutes) / minutesPerDay)
-        .toString() + "%";
 
-    const scaledHeightAndPositionWithTime: CSSProperties = {
+    const scaledPositionWithTime: CSSProperties = {
         top: getPositionPercentFromEntryTime,
-        height: getHeightPercentFromDuration
     };
 
     return (
         <div className={"timescale-entry-card"}
-             style={scaledHeightAndPositionWithTime}>
+             style={scaledPositionWithTime}>
             <div>{scheduleEntry.title}</div>
+            <div>{scheduleEntry.durationInMinutes}</div>
             <div>
                 {new Date(scheduleEntry.entryDate)
                     .toLocaleDateString('de-DE', {day: "2-digit", month: "2-digit", year: "numeric"})}
