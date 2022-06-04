@@ -23,5 +23,4 @@ export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardPr
                     .toLocaleTimeString('de-DE', {hour: "2-digit", minute: "2-digit"})}
             </div>
         </div>
-    )
-}
+    )}

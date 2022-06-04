@@ -5,15 +5,20 @@
 
     font-size: small;
     font-weight: bolder;
+    letter-spacing: -1px;
+    word-spacing: -1px;
+    white-space: pre;
 
     position: relative;
     display: inline-block;
     float: left;
 
+    margin: 0 1% 0 1.5%;
     width: 20px;
 }
 
 .time-info {
-    font-size: smaller;
+    font-size: xx-small;
     font-weight: normal;
+    letter-spacing: -0.5px;
 }
