@@ -1,6 +1,7 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
 import "./TimescaleEntryCard.css";
 import {CSSProperties} from "react";
+import {getPositionPercentFromEntryTime} from "../service/timescalePositionService";
 
 
 type TimescaleEntryCardProps = {
@@ -9,34 +10,17 @@ type TimescaleEntryCardProps = {
 
 export default function TimescaleEntryCard({scheduleEntry}: TimescaleEntryCardProps) {
 
-    const minutesPerDay: number = 24 * 60;
-
-    const entryTimeInMinutes: number =
-        new Date(scheduleEntry.entryDate).getHours() * 60 +
-        new Date(scheduleEntry.entryDate).getMinutes();
-
-    const getPositionPercentFromEntryTime: string = ((100 * entryTimeInMinutes) / minutesPerDay)
-        .toString() + "%";
-    const getHeightPercentFromDuration: string = ((100 * scheduleEntry.durationInMinutes) / minutesPerDay)
-        .toString() + "%";
-
-    const scaledHeightAndPositionWithTime: CSSProperties = {
-        top: getPositionPercentFromEntryTime,
-        height: getHeightPercentFromDuration
+    const scaledPositionWithTime: CSSProperties = {
+        top: getPositionPercentFromEntryTime(scheduleEntry),
     };
 
     return (
         <div className={"timescale-entry-card"}
-             style={scaledHeightAndPositionWithTime}>
+             style={scaledPositionWithTime}>
             <div>{scheduleEntry.title}</div>
-            <div>
-                {new Date(scheduleEntry.entryDate)
-                    .toLocaleDateString('de-DE', {day: "2-digit", month: "2-digit", year: "numeric"})}
-            </div>
-            <div>
+            <div className={"time-info"}>Time:
                 {new Date(scheduleEntry.entryDate)
                     .toLocaleTimeString('de-DE', {hour: "2-digit", minute: "2-digit"})}
             </div>
         </div>
-    )
-}
+    )}
