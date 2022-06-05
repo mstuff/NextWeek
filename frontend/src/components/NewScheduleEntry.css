@@ -140,9 +140,19 @@
     color: #82A3A1;
 }
 
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button:hover {
+    background-color: #616A69;
+    color: #333333;
+}
+
 .MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
     background-color: #565656;
     color: #82A3A1;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button:hover {
+    background-color: #616A69;
+    color: #333333;
 }
 
 .PrivatePickersYear-root.PrivatePickersYear-modeDesktop  {
@@ -158,4 +168,9 @@
 .PrivatePickersYear-yearButton.Mui-selected.css-m1gykc:hover {
     background-color: #6C7D7C;
     color: #333333;
+}
+
+.PrivatePickersYear-yearButton.Mui-selected.css-m1gykc:focus {
+    background-color: #565656;
+    color: #82A3A1;
 }
