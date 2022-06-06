@@ -137,10 +137,11 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                             </div>
                         </LocalizationProvider>
                     </div>
+
                 </div>
                 <input className={"new-entry-add-button"}
                        type={"submit"}
-                       value={"Add new entry"}
+                       value={"Add a new entry"}
                 />
             </form>
         </div>

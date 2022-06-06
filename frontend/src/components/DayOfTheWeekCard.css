@@ -13,7 +13,6 @@
 
     height: 450px;
     min-width: 250px;
-
     box-shadow: 5px 5px 10px #282c34;
 }
 
@@ -30,20 +29,17 @@
 .calender-board-for-cards {
     height: 350px;
     width: 170px;
-
     margin: 5% 1% 3% 1%;
 }
 
 .calender-board-for-bars {
     height: 350px;
     width: 40px;
-
     margin: 5% 1% 3% 1%;
 }
 
 .timescale-container {
     display: flex;
     flex-direction: row;
-
     box-shadow: 5px 5px 10px #282c34;
 }

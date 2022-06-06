@@ -1,5 +1,5 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import ListOfScheduleEntries from "../components/ListOfScheduleEntries";
+import BoardOfScheduleEntries from "../components/BoardOfScheduleEntries";
 import NewScheduleEntry from "../components/NewScheduleEntry";
 
 import "./ScheduleEntriesOverviewPage.css"
@@ -25,7 +25,7 @@ export default function ScheduleEntriesOverviewPage({
             </div>
         </div>
         <div className={"overview-page-div-list-of-entries"}>
-            <ListOfScheduleEntries scheduleEntries={scheduleEntries}/>
+            <BoardOfScheduleEntries scheduleEntries={scheduleEntries}/>
         </div>
     </div>
 }
