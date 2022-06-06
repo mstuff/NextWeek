@@ -1,15 +1,14 @@
 import ScheduleEntryCard from "./ScheduleEntryCard";
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import "./ListOfScheduleEntries.css";
+import "./BoardOfScheduleEntries.css";
 
 
-type ListOfScheduleEntriesProps = {
+type BoardOfScheduleEntriesProps = {
     scheduleEntries: ScheduleEntry [];
 }
 
-export default function ListOfScheduleEntries({scheduleEntries}: ListOfScheduleEntriesProps){
-    return <div className={"list-of-schedule-entries"}>
+export default function BoardOfScheduleEntries({scheduleEntries}: BoardOfScheduleEntriesProps) {
+    return <div className={"board-of-schedule-entries"}>
         {scheduleEntries.map(entry => <ScheduleEntryCard key={entry.id} scheduleEntry={entry}/>)}
     </div>
-
 }

@@ -1,35 +1,44 @@
 
 .new-entry-form {
     color: #36413E;
-    width: 200px;
+
+    width: 550px;
     padding: 10px;
+    margin: 4% 1.5% 4% 1.5%;
+
+    border-radius: 5pt;
+    box-shadow: 5px 5px 10px #282c34;
 }
 
-.new-entry-input-field {
-    background-color: #565656;
-    color: #82A3A1;
+.entry-fields-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
 
-    font-family: -apple-system, 'Helvetica Neue', sans-serif;;
-    font-size: 1rem;
-    font-weight: normal;
-    line-height: 1.4375em;
+.text-fields-container {
+    margin: 0 3% 0 10%;
+}
 
-    width: 200px;
-    padding: 10px;
-    margin: 5px 0 5px;
-    border: none;
-    border-bottom: 2px solid #82A3A1;
+.date-fields-container {
+    margin: 0 10% 0 3%;
 }
 
 .new-entry-add-button {
     background-color: #565656;
     color: #82A3A1;
 
-    width: 100px;
+    width: 120px;
     padding: 5px;
     margin: 20px 0 5px;
+
     border-radius: 5px;
     border-color: #82A3A1;
+    box-shadow: 5px 5px 10px #282c34;
+}
+
+.margin-for-mui-fields{
+    margin: 7% 0 5%;
 }
 
 .MuiFormControl-root.MuiTextField-root {
@@ -44,6 +53,18 @@
 }
 
 .MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl {
+    color: #82A3A1;
+}
+
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl::after{
+    border-bottom: 2px solid #ADC2C1;
+}
+
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-error::after{
+    border-bottom: 2px solid #d32f2f;
+}
+
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd {
     color: #82A3A1;
 }
 
@@ -93,6 +114,26 @@
     background-color: #666666;
 }
 
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
+    background-color: #565656;
+    color: #82A3A1;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button:hover {
+    background-color: #616A69;
+    color: #333333;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
+    background-color: #565656;
+    color: #82A3A1;
+}
+
+.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button:hover {
+    background-color: #616A69;
+    color: #333333;
+}
+
 .css-1dozdou {
     background-color: #82A3A1;
     color: #565656;
@@ -119,10 +160,6 @@
     color: #82A3A1;
 }
 
-.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd {
-    color: #82A3A1;
-}
-
 .MuiInputLabel-root.MuiInputLabel-formControl.MuiInputLabel-animated.MuiInputLabel-standard.MuiFormLabel-root.MuiFormLabel-colorPrimary {
     color: #82A3A1;
 }
@@ -133,16 +170,6 @@
 
 .MuiInputAdornment-root.MuiInputAdornment-positionEnd.MuiInputAdornment-standard.MuiInputAdornment-sizeMedium {
     fill: #82A3A1;
-}
-
-.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeEnd.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
-    background-color: #565656;
-    color: #82A3A1;
-}
-
-.MuiButtonBase-root.MuiIconButton-root.MuiIconButton-edgeStart.MuiIconButton-sizeSmall.MuiPickersArrowSwitcher-button {
-    background-color: #565656;
-    color: #82A3A1;
 }
 
 .PrivatePickersYear-root.PrivatePickersYear-modeDesktop  {
@@ -158,4 +185,9 @@
 .PrivatePickersYear-yearButton.Mui-selected.css-m1gykc:hover {
     background-color: #6C7D7C;
     color: #333333;
+}
+
+.PrivatePickersYear-yearButton.Mui-selected.css-m1gykc:focus {
+    background-color: #565656;
+    color: #82A3A1;
 }

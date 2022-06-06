@@ -73,52 +73,76 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
     return (
         <div className={"new-entry-form"}>
             <form onSubmit={onAdd}>
-                <input className={"new-entry-input-field"}
-                       type={"text"}
-                       placeholder={"Title"}
-                       value={title}
-                       onChange={event => event && setTitle(event.target.value)}/>
-                <input className={"new-entry-input-field"}
-                       type={"text"}
-                       placeholder={"Description"}
-                       value={description}
-                       onChange={event => event && setDescription(event.target.value)}/>
-                <LocalizationProvider dateAdapter={AdapterDateFns}>
-                    <DesktopDatePicker
-                        label="Start date"
-                        mask={"__.__.____"}
-                        value={entryDate}
-                        inputFormat={"dd.MM.yyyy"}
-                        onChange={(newValue) => {
-                            setEntryDate((newValue));
-                        }}
-                        renderInput={renderInput}
-                    />
-                    <DesktopTimePicker
-                        label="Start time"
-                        mask={"__:__"}
-                        value={entryTime}
-                        inputFormat={"HH:mm"}
-                        disableOpenPicker={true}
-                        onChange={(newValue) => {
-                            setEntryTime((newValue));
-                        }}
-                        renderInput={renderInput}
-                    />
-                    <DesktopTimePicker
-                        label="Select a duration"
-                        mask={"__:__"}
-                        value={entryDuration}
-                        inputFormat={"HH:mm"}
-                        disableOpenPicker={true}
-                        onChange={(newValue) => {
-                            setEntryDuration((newValue));
-                        }}
-                        renderInput={renderInput}
-                    />
-                </LocalizationProvider>
+                <div className={"entry-fields-container"}>
+                    <div className={"text-fields-container"}>
+                        <div className={"margin-for-mui-fields"}>
+                            <TextField
+                                id={"standard-basic"}
+                                label={"Title"}
+                                variant={"standard"}
+                                value={title}
+                                onChange={event => event && setTitle(event.target.value)}
+                            />
+                        </div>
+                        <div className={"margin-for-mui-fields"}>
+                            <TextField
+                                id={"standard-basic"}
+                                label={"Description"}
+                                variant={"standard"}
+                                value={description}
+                                onChange={event => event && setDescription(event.target.value)}
+                            />
+                        </div>
+                    </div>
+                    <div className={"date-fields-container"}>
+                        <LocalizationProvider dateAdapter={AdapterDateFns}>
+                            <div className={"margin-for-mui-fields"}>
+                                <DesktopDatePicker
+                                    label="Start date"
+                                    mask={"__.__.____"}
+                                    minDate={new Date()}
+                                    value={entryDate}
+                                    inputFormat={"dd.MM.yyyy"}
+                                    onChange={(newValue) => {
+                                        setEntryDate((newValue));
+                                    }}
+                                    renderInput={renderInput}
+                                />
+                            </div>
+                            <div className={"margin-for-mui-fields"}>
+                                <DesktopTimePicker
+                                    label="Start time"
+                                    mask={"__:__"}
+                                    value={entryTime}
+                                    inputFormat={"HH:mm"}
+                                    disableOpenPicker={true}
+                                    onChange={(newValue) => {
+                                        setEntryTime((newValue));
+                                    }}
+                                    renderInput={renderInput}
+                                />
+                            </div>
+                            <div className={"margin-for-mui-fields"}>
+                                <DesktopTimePicker
+                                    label="Select a duration"
+                                    mask={"__:__"}
+                                    value={entryDuration}
+                                    inputFormat={"HH:mm"}
+                                    disableOpenPicker={true}
+                                    onChange={(newValue) => {
+                                        setEntryDuration((newValue));
+                                    }}
+                                    renderInput={renderInput}
+                                />
+                            </div>
+                        </LocalizationProvider>
+                    </div>
+
+                </div>
                 <input className={"new-entry-add-button"}
-                       type={"submit"} value={"Add new entry"}/>
+                       type={"submit"}
+                       value={"Add a new entry"}
+                />
             </form>
         </div>
     )

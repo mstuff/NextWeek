@@ -8,6 +8,7 @@
     letter-spacing: -1px;
     word-spacing: -1px;
     white-space: pre;
+    text-shadow: 5px 5px 7px #282c34;
 
     position: relative;
     display: inline-block;

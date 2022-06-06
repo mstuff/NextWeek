@@ -25,7 +25,6 @@ export default function WeekBoard({scheduleEntries}: WeekBoardProps) {
         }
 
         setSelectedWeek([]);
-
         setSelectedWeek(
             (week) => [...week,
                 new Date(selectedDay),
@@ -45,9 +44,11 @@ export default function WeekBoard({scheduleEntries}: WeekBoardProps) {
     return (
         <div>
             <div>
-                <form onSubmit={onSelect}>
+                <form className={"day-picker"}
+                      onSubmit={onSelect}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DesktopDatePicker
+                            className={"start-picker-field"}
                             label="Day to start the week"
                             mask={"__.__.____"}
                             value={selectedDay}
@@ -58,7 +59,7 @@ export default function WeekBoard({scheduleEntries}: WeekBoardProps) {
                             renderInput={renderInput}
                         />
                     </LocalizationProvider>
-                    <input className={"new-entry-add-button"}
+                    <input className={"select-day-button"}
                            type={"submit"} value={"Select this day"}/>
                 </form>
             </div>
