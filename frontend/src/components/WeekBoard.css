@@ -1,4 +1,27 @@
 
+.day-picker {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.start-picker-field {
+    margin: 0 2% 3% 2%;
+}
+
+.select-day-button {
+    background-color: #565656;
+    color: #82A3A1;
+
+    width: 120px;
+    padding: 5px;
+    margin: 1% 5% 1% 5%;
+
+    border-radius: 5px;
+    border-color: #82A3A1;
+    box-shadow: 5px 5px 10px #282c34;
+}
+
 .week-board-outer {
     display: flex;
     flex-direction: row;

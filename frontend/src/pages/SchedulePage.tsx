@@ -2,7 +2,7 @@ import {ScheduleEntry} from "../model/ScheduleEntry";
 import BoardOfScheduleEntries from "../components/BoardOfScheduleEntries";
 import NewScheduleEntry from "../components/NewScheduleEntry";
 
-import "./ScheduleEntriesOverviewPage.css"
+import "./SchedulePage.css"
 import WeekBoard from "../components/WeekBoard";
 
 type ScheduleEntriesOverviewPageProps = {
@@ -10,21 +10,21 @@ type ScheduleEntriesOverviewPageProps = {
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
 }
 
-export default function ScheduleEntriesOverviewPage({
-                                                        scheduleEntries,
-                                                        addScheduleEntry
-                                                    }: ScheduleEntriesOverviewPageProps) {
+export default function SchedulePage({
+                                         scheduleEntries,
+                                         addScheduleEntry
+                                     }: ScheduleEntriesOverviewPageProps) {
 
     return <div>
         <div>
             <WeekBoard scheduleEntries={scheduleEntries}/>
         </div>
-        <div className={"container"}>
-            <div className={"overview-page-div-new-entry"}>
+        <div className={"schedule-page-container"}>
+            <div className={"schedule-page-div-new-entry"}>
                 <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
             </div>
         </div>
-        <div className={"overview-page-div-list-of-entries"}>
+        <div className={"schedule-page-div-list-of-entries"}>
             <BoardOfScheduleEntries scheduleEntries={scheduleEntries}/>
         </div>
     </div>
