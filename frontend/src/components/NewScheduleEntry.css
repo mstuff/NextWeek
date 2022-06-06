@@ -60,6 +60,10 @@
     border-bottom: 2px solid #ADC2C1;
 }
 
+.MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.Mui-error::after{
+    border-bottom: 2px solid #d32f2f;
+}
+
 .MuiInput-root.MuiInput-underline.MuiInputBase-root.MuiInputBase-colorPrimary.MuiInputBase-formControl.MuiInputBase-adornedEnd {
     color: #82A3A1;
 }

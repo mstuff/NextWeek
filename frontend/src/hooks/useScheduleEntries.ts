@@ -9,7 +9,7 @@ export default function useScheduleEntries(){
 
     useEffect(() => {
         getAllScheduleEntriesByApi()
-            .then(data => setScheduleEntries(data))
+            .then(data => {data.length !== 0 ? setScheduleEntries(data) : alert("So far no entries!")})
             .catch(console.error);
         }, [])
 
@@ -18,6 +18,5 @@ export default function useScheduleEntries(){
             .then(addedEntry => setScheduleEntries([...scheduleEntries, addedEntry]))
             .catch(console.error);
     }
-
     return {scheduleEntries, addScheduleEntry}
 }
