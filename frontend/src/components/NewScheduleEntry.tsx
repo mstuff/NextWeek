@@ -96,7 +96,8 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                     </div>
                     <div className={"date-fields-container"}>
                         <LocalizationProvider dateAdapter={AdapterDateFns}>
-                            <div className={"margin-for-mui-fields"}>
+                            <div className={"margin-for-mui-fields"}> {//eslint-disable-next-line
+                            }
                                 <DesktopDatePicker
                                     label="Start date"
                                     mask={"__.__.____"}

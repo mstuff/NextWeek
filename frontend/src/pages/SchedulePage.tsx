@@ -5,15 +5,12 @@ import NewScheduleEntry from "../components/NewScheduleEntry";
 import "./SchedulePage.css"
 import WeekBoard from "../components/WeekBoard";
 
-type ScheduleEntriesOverviewPageProps = {
+type SchedulePageProps = {
     scheduleEntries: ScheduleEntry [];
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
 }
 
-export default function SchedulePage({
-                                         scheduleEntries,
-                                         addScheduleEntry
-                                     }: ScheduleEntriesOverviewPageProps) {
+export default function SchedulePage({scheduleEntries, addScheduleEntry}: SchedulePageProps) {
 
     return <div>
         <div>

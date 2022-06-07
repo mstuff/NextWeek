@@ -6,14 +6,11 @@ type ScheduleEntryCardProps = {
 }
 
 export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProps) {
-
     return (
         <div className={"schedule-entry-card"}>
-
             <div>
                 <div className={"title-entry-card"}>{scheduleEntry.title}</div>
             </div>
-
             <div className={"entry-card-time-info"}>
                 <div>
                     {new Date(scheduleEntry.entryDate)
@@ -25,10 +22,9 @@ export default function ScheduleEntryCard({scheduleEntry}: ScheduleEntryCardProp
                 </div>
                 <div>
                     {Math.trunc(scheduleEntry.durationInMinutes / 60)} {"h "}
-                    {Math.trunc(scheduleEntry.durationInMinutes % 60)} min
+                    {Math.trunc(scheduleEntry.durationInMinutes % 60)} {"min"}
                 </div>
             </div>
-
         </div>
     )
 }
