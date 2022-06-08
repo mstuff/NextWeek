@@ -168,6 +168,7 @@ class ScheduleEntryServiceTest {
 
         //GIVEN
         String id = "123";
+        when(scheduleEntryRepository.existsById(id)).thenReturn(true);
 
         //WHEN
         scheduleEntryService.deleteEntryById(id);
