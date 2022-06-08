@@ -13,5 +13,9 @@ export const addNewScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => Promi
 
     return axios.post("/api/schedule", newEntry)
         .then(response => response.data)
+}
 
+export const deleteScheduleEntryById: (entryId: string) => Promise<void>
+    = (entryId) => {
+    return axios.delete(`/api/schedule/${entryId}`);
 }

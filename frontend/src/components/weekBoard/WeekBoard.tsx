@@ -6,7 +6,7 @@ import {DesktopDatePicker} from "@mui/x-date-pickers";
 import * as React from "react";
 import {FormEvent, useState} from "react";
 import TextField from "@mui/material/TextField";
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 
 type WeekBoardProps = {
     scheduleEntries: ScheduleEntry [];

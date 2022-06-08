@@ -1,4 +1,4 @@
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 import {FormEvent, useState} from "react";
 import "./NewScheduleEntry.css";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";

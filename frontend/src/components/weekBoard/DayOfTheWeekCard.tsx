@@ -1,5 +1,5 @@
 import "./DayOfTheWeekCard.css"
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 import TimescaleBoard from "./TimescaleBoard";
 import TimescaleBarBox from "./TimescaleBarBox";
 

@@ -1,16 +1,21 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import BoardOfScheduleEntries from "../components/BoardOfScheduleEntries";
-import NewScheduleEntry from "../components/NewScheduleEntry";
+import BoardOfScheduleEntries from "../components/entryOverview/BoardOfScheduleEntries";
+import NewScheduleEntry from "../components/entryOverview/NewScheduleEntry";
 
 import "./SchedulePage.css"
-import WeekBoard from "../components/WeekBoard";
+import WeekBoard from "../components/weekBoard/WeekBoard";
 
 type SchedulePageProps = {
     scheduleEntries: ScheduleEntry [];
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
+    deleteScheduleEntry: (entryId: string) => void;
 }
 
-export default function SchedulePage({scheduleEntries, addScheduleEntry}: SchedulePageProps) {
+export default function SchedulePage({
+                                         scheduleEntries,
+                                         addScheduleEntry,
+                                         deleteScheduleEntry
+                                     }: SchedulePageProps) {
 
     return <div>
         <div>
@@ -22,7 +27,8 @@ export default function SchedulePage({scheduleEntries, addScheduleEntry}: Schedu
             </div>
         </div>
         <div className={"schedule-page-div-list-of-entries"}>
-            <BoardOfScheduleEntries scheduleEntries={scheduleEntries}/>
+            <BoardOfScheduleEntries scheduleEntries={scheduleEntries}
+                                    deleteScheduleEntry={deleteScheduleEntry}/>
         </div>
     </div>
 }

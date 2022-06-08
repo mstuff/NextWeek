@@ -1,19 +1,20 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
-import BoardOfScheduleEntries from "../components/BoardOfScheduleEntries";
-import NewScheduleEntry from "../components/NewScheduleEntry";
+import BoardOfScheduleEntries from "../components/entryOverview/BoardOfScheduleEntries";
+import NewScheduleEntry from "../components/entryOverview/NewScheduleEntry";
 import "./AllEntriesOverviewPage.css"
 
 
 type AllEntriesOverviewPageProps = {
     scheduleEntries: ScheduleEntry [];
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
+    deleteScheduleEntry: (entryId: string) => void;
 }
 
 export default function AllEntriesOverviewPage({
                                                    scheduleEntries,
-                                                   addScheduleEntry
+                                                   addScheduleEntry,
+                                                   deleteScheduleEntry
                                                }: AllEntriesOverviewPageProps) {
-
     return <div>
         <div className={"container"}>
             <div className={"overview-page-div-new-entry"}>
@@ -21,7 +22,8 @@ export default function AllEntriesOverviewPage({
             </div>
         </div>
         <div className={"overview-page-div-list-of-entries"}>
-            <BoardOfScheduleEntries scheduleEntries={scheduleEntries}/>
+            <BoardOfScheduleEntries scheduleEntries={scheduleEntries}
+                                    deleteScheduleEntry={deleteScheduleEntry}/>
         </div>
     </div>
 }

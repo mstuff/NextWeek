@@ -1,7 +1,7 @@
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 import "./TimescaleEntryCard.css";
 import {CSSProperties} from "react";
-import {getPositionPercentFromEntryTime} from "../service/timescalePositionService";
+import {getPositionPercentFromEntryTime} from "../../service/timescalePositionService";
 
 
 type TimescaleEntryCardProps = {
