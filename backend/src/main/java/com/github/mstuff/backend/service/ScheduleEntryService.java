@@ -1,6 +1,6 @@
 package com.github.mstuff.backend.service;
 
-import com.github.mstuff.backend.dto.DtoNewScheduleEntry;
+import com.github.mstuff.backend.dto.DtoScheduleEntry;
 import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,34 +24,40 @@ public class ScheduleEntryService {
         return scheduleEntryRepository.findAll();
     }
 
-    public ScheduleEntry addNewScheduleEntry(DtoNewScheduleEntry dtoNewScheduleEntry) {
-
+    public ScheduleEntry addNewScheduleEntry(DtoScheduleEntry dtoNewScheduleEntry) {
         try {
             validateInput(dtoNewScheduleEntry);
-            ScheduleEntry newScheduleEntry = new ScheduleEntry();
-
-            newScheduleEntry.setTitle(dtoNewScheduleEntry.getTitle());
-            newScheduleEntry.setDescription(dtoNewScheduleEntry.getDescription());
-            newScheduleEntry.setEntryDate(dtoNewScheduleEntry.getEntryDate());
-            newScheduleEntry.setDurationInMinutes(dtoNewScheduleEntry.getDurationInMinutes());
-
+            ScheduleEntry newScheduleEntry = extractEntryFromDto(dtoNewScheduleEntry);
             return scheduleEntryRepository.insert(newScheduleEntry);
-
         } catch (IllegalArgumentException e) {
             throw new IllegalArgumentException(e.getMessage());
         }
     }
 
-    public void deleteEntryById(String id) {
-        if (scheduleEntryRepository.existsById(id)) {
-            scheduleEntryRepository.deleteById(id);
-        } else {
-            throw new NoSuchElementException("There is no entry with id " + id);
+    public ScheduleEntry updateScheduleEntry(String id, DtoScheduleEntry dtoEntryUpdate) {
+        try {
+            validateInput(dtoEntryUpdate);
+            checkIfEntryExists(id);
+            ScheduleEntry updatedEntry = extractEntryFromDto(dtoEntryUpdate);
+            updatedEntry.setId(id);
+            return scheduleEntryRepository.save(updatedEntry);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException(e.getMessage());
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(e.getMessage());
         }
     }
 
-    private void validateInput(DtoNewScheduleEntry dtoNewEntry) {
+    public void deleteEntryById(String id) {
+        try {
+            checkIfEntryExists(id);
+            scheduleEntryRepository.deleteById(id);
+        } catch (NoSuchElementException e) {
+            throw new NoSuchElementException(e.getMessage());
+        }
+    }
 
+    private void validateInput(DtoScheduleEntry dtoNewEntry) {
         if (dtoNewEntry.getTitle() == null) {
             throw new IllegalArgumentException("The title of the new entry was null");
         } else if (dtoNewEntry.getDescription() == null) {
@@ -61,5 +67,23 @@ public class ScheduleEntryService {
         } else if (dtoNewEntry.getDurationInMinutes() == null) {
             throw new IllegalArgumentException("The duration of the new entry was null");
         }
+    }
+
+    private void checkIfEntryExists(String id) {
+        if (!scheduleEntryRepository.existsById(id)) {
+            throw new NoSuchElementException("There is no entry with id " + id);
+        }
+    }
+
+    private ScheduleEntry extractEntryFromDto(DtoScheduleEntry dtoEntry) {
+
+        ScheduleEntry extractedScheduleEntry = new ScheduleEntry();
+
+        extractedScheduleEntry.setTitle(dtoEntry.getTitle());
+        extractedScheduleEntry.setDescription(dtoEntry.getDescription());
+        extractedScheduleEntry.setEntryDate(dtoEntry.getEntryDate());
+        extractedScheduleEntry.setDurationInMinutes(dtoEntry.getDurationInMinutes());
+
+        return extractedScheduleEntry;
     }
 }

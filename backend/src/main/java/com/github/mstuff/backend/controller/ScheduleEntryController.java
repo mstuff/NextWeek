@@ -1,6 +1,6 @@
 package com.github.mstuff.backend.controller;
 
-import com.github.mstuff.backend.dto.DtoNewScheduleEntry;
+import com.github.mstuff.backend.dto.DtoScheduleEntry;
 import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.service.ScheduleEntryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +25,13 @@ public class ScheduleEntryController {
     }
 
     @PostMapping
-    public ScheduleEntry addNewScheduleEntry(@RequestBody DtoNewScheduleEntry dtoNewScheduleEntry) {
+    public ScheduleEntry addNewScheduleEntry(@RequestBody DtoScheduleEntry dtoNewScheduleEntry) {
         return scheduleEntryService.addNewScheduleEntry(dtoNewScheduleEntry);
+    }
+
+    @PutMapping("{id}")
+    public ScheduleEntry updateScheduleEntry(@PathVariable String id, @RequestBody DtoScheduleEntry dtoUpdateEntry) {
+        return scheduleEntryService.updateScheduleEntry(id, dtoUpdateEntry);
     }
 
     @DeleteMapping("{id}")

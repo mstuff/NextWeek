@@ -13,7 +13,7 @@ import java.time.Instant;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class DtoNewScheduleEntry {
+public class DtoScheduleEntry {
 
     private String title;
     private String description;

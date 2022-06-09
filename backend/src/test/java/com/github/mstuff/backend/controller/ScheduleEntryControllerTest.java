@@ -1,6 +1,6 @@
 package com.github.mstuff.backend.controller;
 
-import com.github.mstuff.backend.dto.DtoNewScheduleEntry;
+import com.github.mstuff.backend.dto.DtoScheduleEntry;
 import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,7 +83,7 @@ class ScheduleEntryControllerTest {
     void addNewScheduleEntry_shouldReturnTheNewScheduleEntry() {
 
         //GIVEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
@@ -114,7 +114,7 @@ class ScheduleEntryControllerTest {
     void addNewScheduleEntry_whenMissingTitle_shouldThrowIllegalArgumentException() {
 
         //GIVEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
                 .durationInMinutes(400)
@@ -133,7 +133,7 @@ class ScheduleEntryControllerTest {
     void addNewScheduleEntry_whenMissingDescription_shouldThrowIllegalArgumentException() {
 
         //GIVEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Title1")
 
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
@@ -152,7 +152,7 @@ class ScheduleEntryControllerTest {
     void addNewScheduleEntry_whenMissingEntryDate_shouldThrowIllegalArgumentException() {
 
         //GIVEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Title1")
                 .description("Description")
 
