@@ -12,20 +12,20 @@ type ScheduleEntryCardProps = {
 
 export default function ScheduleEntryCard({scheduleEntry, deleteScheduleEntry}: ScheduleEntryCardProps) {
 
-    const [popUp, setPopUp] = useState<boolean>(false);
+    const [deleteAlertEnabled, setDeleteAlertEnabled] = useState<boolean>(false);
 
     const handleDelete: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
-        setPopUp(true);
+        setDeleteAlertEnabled(true);
     }
 
     return (
         <div className={"schedule-entry-card"}>
             <div>
                 <div className={"title-entry-card"}>{scheduleEntry.title}</div>
-                {popUp && <DeleteAlert scheduleEntry={scheduleEntry}
+                {deleteAlertEnabled && <DeleteAlert scheduleEntry={scheduleEntry}
                                        deleteScheduleEntry={deleteScheduleEntry}
-                                       setPopUp={setPopUp}/>}
+                                       setDeleteAlertEnabled={setDeleteAlertEnabled}/>}
             </div>
             <div className={"entry-card-info-and-actions-tiles"}>
                 <div className={"entry-card-time-info"}>
