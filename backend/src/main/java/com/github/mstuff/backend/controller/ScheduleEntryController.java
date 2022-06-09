@@ -29,4 +29,10 @@ public class ScheduleEntryController {
         return scheduleEntryService.addNewScheduleEntry(dtoNewScheduleEntry);
     }
 
+    @DeleteMapping("{id}")
+    public void deleteScheduleEntryById(@PathVariable String id) {
+        scheduleEntryService.deleteEntryById(id);
+    }
+
+
 }

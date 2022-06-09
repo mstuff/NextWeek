@@ -1,0 +1,53 @@
+
+.delete-entry-alert-card {
+    background-color: #565656;
+    color: #82A3A1;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: absolute;
+
+    margin-left: 7px;
+    border-radius: 5pt;
+
+    height: 60px;
+    width: 210px;
+}
+
+
+.delete-alert-text {
+    font-weight: bolder;
+
+    display: flex;
+    justify-content: left;
+    margin-left: 6%;
+}
+
+.position-delete-alert-buttons {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.delete-confirm-button {
+    background-color: #565656;
+    color: #82A3A1;
+
+    margin-top: 5%;
+    border-radius: 5px;
+    border-color: #82A3A1;
+
+    width: 50px;
+}
+
+.dont-delete-button {
+    background-color: #82A3A1;
+    color: #565656;
+
+    margin-top: 5%;
+    border-radius: 5px;
+    border-color: #82A3A1;
+
+    width: 120px;
+}

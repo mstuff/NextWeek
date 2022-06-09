@@ -1,4 +1,4 @@
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 import EntryTimeScaleBar from "./EntryTimeScaleBar";
 import "./TimescaleBarBox.css"
 

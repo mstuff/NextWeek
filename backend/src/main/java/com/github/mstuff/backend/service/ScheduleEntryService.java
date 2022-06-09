@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
+
 
 @Service
 public class ScheduleEntryService {
@@ -40,6 +42,14 @@ public class ScheduleEntryService {
         }
     }
 
+    public void deleteEntryById(String id) {
+        if (scheduleEntryRepository.existsById(id)) {
+            scheduleEntryRepository.deleteById(id);
+        } else {
+            throw new NoSuchElementException("There is no entry with id " + id);
+        }
+    }
+
     private void validateInput(DtoNewScheduleEntry dtoNewEntry) {
 
         if (dtoNewEntry.getTitle() == null) {
@@ -48,7 +58,7 @@ public class ScheduleEntryService {
             throw new IllegalArgumentException("The description of the new entry was null");
         } else if (dtoNewEntry.getEntryDate() == null) {
             throw new IllegalArgumentException("The date of the new entry was null");
-        }else if (dtoNewEntry.getDurationInMinutes() == null) {
+        } else if (dtoNewEntry.getDurationInMinutes() == null) {
             throw new IllegalArgumentException("The duration of the new entry was null");
         }
     }

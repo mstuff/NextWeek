@@ -62,12 +62,12 @@ class ScheduleEntryControllerTest {
 
         //THEN
         List<ScheduleEntry> expected = List.of(ScheduleEntry.builder()
-                .id("123")
-                .title("Appointment1")
-                .description("description1")
-                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
-                .build(),
+                        .id("123")
+                        .title("Appointment1")
+                        .description("description1")
+                        .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                        .durationInMinutes(400)
+                        .build(),
                 ScheduleEntry.builder()
                         .id("456")
                         .title("Appointment2")
@@ -127,7 +127,6 @@ class ScheduleEntryControllerTest {
                 .bodyValue(dtoNewEntry)
                 .exchange()
                 .expectStatus().isEqualTo(400);
-
     }
 
     @Test
@@ -147,7 +146,6 @@ class ScheduleEntryControllerTest {
                 .bodyValue(dtoNewEntry)
                 .exchange()
                 .expectStatus().isEqualTo(400);
-
     }
 
     @Test
@@ -167,8 +165,66 @@ class ScheduleEntryControllerTest {
                 .bodyValue(dtoNewEntry)
                 .exchange()
                 .expectStatus().isEqualTo(400);
-
     }
 
+    @Test
+    void deleteScheduleEntryById_whenIdExists_shouldDeleteEntry() {
 
+        //GIVEN
+        ScheduleEntry scheduleEntry1 = ScheduleEntry.builder()
+                .id("123")
+                .title("Appointment1")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+        ScheduleEntry scheduleEntry2 = ScheduleEntry.builder()
+                .id("456")
+                .title("Appointment2")
+                .description("description3")
+                .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
+                .durationInMinutes(600)
+                .build();
+        scheduleEntryRepository.insert(scheduleEntry1);
+        scheduleEntryRepository.insert(scheduleEntry2);
+
+        //WHEN
+        webTestClient.delete()
+                .uri("/api/schedule/123")
+                .exchange()
+                .expectStatus().is2xxSuccessful();
+
+        //THEN
+        List<ScheduleEntry> actual = scheduleEntryRepository.findAll();
+        List<ScheduleEntry> expected = List.of(scheduleEntry2);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void deleteScheduleEntryById_whenIdNotValid_shouldThrowNoSuchElementException() {
+
+        //GIVEN
+        ScheduleEntry scheduleEntry1 = ScheduleEntry.builder()
+                .id("123")
+                .title("Appointment1")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+        ScheduleEntry scheduleEntry2 = ScheduleEntry.builder()
+                .id("456")
+                .title("Appointment2")
+                .description("description3")
+                .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
+                .durationInMinutes(600)
+                .build();
+        scheduleEntryRepository.insert(scheduleEntry1);
+        scheduleEntryRepository.insert(scheduleEntry2);
+
+        //WHEN //THEN
+        webTestClient.delete()
+                .uri("/api/schedule/9")
+                .exchange()
+                .expectStatus().isEqualTo(400);
+    }
 }

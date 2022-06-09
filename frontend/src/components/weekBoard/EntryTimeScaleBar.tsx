@@ -1,7 +1,7 @@
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 import {CSSProperties} from "react";
 import "./EntryTimeScaleBar.css";
-import {getHeightPercentFromDuration, getPositionPercentFromEntryTime} from "../service/timescalePositionService";
+import {getHeightPercentFromDuration, getPositionPercentFromEntryTime} from "../../service/timescalePositionService";
 
 
 type TimescaleEntryBarProps = {

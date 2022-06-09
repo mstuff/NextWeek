@@ -1,0 +1,51 @@
+
+.schedule-entry-card {
+    background-color: #565656;
+    color: #82A3A1;
+
+    margin: 1% 1% 0.5% 1%;
+    border: 2pt solid #82A3A1;
+    border-radius: 5pt;
+    box-shadow: 5px 5px 10px #282c34;
+
+    height: 130px;
+    width: 220px;
+}
+
+.entry-card-info-and-actions-tiles {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.title-entry-card {
+    font-size: x-large;
+    font-weight: bolder;
+    text-align: left;
+
+    margin: 5% 1% 5% 4%;
+}
+
+.entry-card-time-info {
+    text-align: left;
+
+    margin: 1% 1% 0.5% 4%;
+}
+
+.action-tiles {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+
+    margin: 1% 5% 0 4%;
+}
+
+.delete-button {
+    background-color: transparent;
+    border: none;
+    padding: 20%;
+
+    height: 30px;
+    width: 30px;
+}

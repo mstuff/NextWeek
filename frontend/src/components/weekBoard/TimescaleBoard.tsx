@@ -1,4 +1,4 @@
-import {ScheduleEntry} from "../model/ScheduleEntry";
+import {ScheduleEntry} from "../../model/ScheduleEntry";
 import TimescaleEntryCard from "./TimescaleEntryCard";
 import "./TimescaleBoard.css"
 

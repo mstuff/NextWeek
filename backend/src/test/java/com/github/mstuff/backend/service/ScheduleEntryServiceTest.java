@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 import java.time.Instant;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -53,7 +54,7 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenValidEntryAdded_shouldReturnNewEntry () {
+    void addNewScheduleEntry_whenValidEntryAdded_shouldReturnNewEntry() {
 
         //GIVEN
         ScheduleEntry newEntry1 = ScheduleEntry.builder()
@@ -95,7 +96,7 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenNewEntryTitleIsNull_shouldThrowException () {
+    void addNewScheduleEntry_whenNewEntryTitleIsNull_shouldThrowException() {
 
         //GIVEN
         //WHEN
@@ -112,7 +113,7 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenNewEntryDescriptionIsNull_shouldThrowException () {
+    void addNewScheduleEntry_whenNewEntryDescriptionIsNull_shouldThrowException() {
 
         //GIVEN
         //WHEN
@@ -129,7 +130,7 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenNewEntryDateIsNull_shouldThrowException () {
+    void addNewScheduleEntry_whenNewEntryDateIsNull_shouldThrowException() {
 
         //GIVEN
         //WHEN
@@ -146,7 +147,7 @@ class ScheduleEntryServiceTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenNewEntryTimeIsNull_shouldThrowException () {
+    void addNewScheduleEntry_whenNewEntryTimeIsNull_shouldThrowException() {
 
         //GIVEN
         //WHEN
@@ -160,5 +161,33 @@ class ScheduleEntryServiceTest {
         //THEN
         assertThrows(IllegalArgumentException.class,
                 () -> scheduleEntryService.addNewScheduleEntry(dtoNewEntry));
+    }
+
+    @Test
+    void deleteEntryById_whenEntryExists_shouldDeleteEntry() {
+
+        //GIVEN
+        String id = "123";
+        when(scheduleEntryRepository.existsById(id)).thenReturn(true);
+
+        //WHEN
+        scheduleEntryService.deleteEntryById(id);
+
+        //THEN
+        verify(scheduleEntryRepository).deleteById(id);
+    }
+
+    @Test
+    void deleteEntryById_whenEntryDoesNotExist_shouldThrowException() {
+
+        //GIVEN
+        String wrongId = "123";
+        when(scheduleEntryRepository.existsById(wrongId)).thenReturn(false);
+
+        //WHEN
+        //THEN
+        assertThrows(NoSuchElementException.class,
+                () -> scheduleEntryService.deleteEntryById(wrongId));
+        verify(scheduleEntryRepository).existsById(wrongId);
     }
 }
