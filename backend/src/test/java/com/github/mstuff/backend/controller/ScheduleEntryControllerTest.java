@@ -34,22 +34,8 @@ class ScheduleEntryControllerTest {
     void getAllAppointments_shouldReturnAppointmentsFromDb() {
 
         //GIVEN
-        ScheduleEntry scheduleEntry1 = ScheduleEntry.builder()
-                .id("123")
-                .title("Appointment1")
-                .description("description1")
-                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
-                .build();
-        ScheduleEntry scheduleEntry2 = ScheduleEntry.builder()
-                .id("456")
-                .title("Appointment2")
-                .description("description3")
-                .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
-                .durationInMinutes(600)
-                .build();
-        scheduleEntryRepository.insert(scheduleEntry1);
-        scheduleEntryRepository.insert(scheduleEntry2);
+        scheduleEntryRepository.insert(createTestEntry1());
+        scheduleEntryRepository.insert(createTestEntry2());
 
         //WHEN
         List<ScheduleEntry> actual = webTestClient.get()
@@ -66,7 +52,7 @@ class ScheduleEntryControllerTest {
                         .title("Appointment1")
                         .description("description1")
                         .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                        .durationInMinutes(400)
+                        .durationInMinutes(150)
                         .build(),
                 ScheduleEntry.builder()
                         .id("456")
@@ -87,7 +73,7 @@ class ScheduleEntryControllerTest {
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
+                .durationInMinutes(150)
                 .build();
 
         //WHEN
@@ -106,18 +92,18 @@ class ScheduleEntryControllerTest {
         assertEquals("Appointment1", actual.getTitle());
         assertEquals("description1", actual.getDescription());
         assertEquals(Instant.parse("2022-05-28T22:00:00.000Z"), actual.getEntryDate());
-        assertEquals(400, actual.getDurationInMinutes());
+        assertEquals(150, actual.getDurationInMinutes());
         assertEquals(24, actual.getId().length());
     }
 
     @Test
-    void addNewScheduleEntry_whenMissingTitle_shouldThrowIllegalArgumentException() {
+    void addNewScheduleEntry_whenMissingTitle_shouldExpectStatus400() {
 
         //GIVEN
         DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
+                .durationInMinutes(150)
                 .build();
 
         //WHEN //THEN
@@ -130,14 +116,14 @@ class ScheduleEntryControllerTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenMissingDescription_shouldThrowIllegalArgumentException() {
+    void addNewScheduleEntry_whenMissingDescription_shouldExpectStatus400() {
 
         //GIVEN
         DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Title1")
 
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
+                .durationInMinutes(150)
                 .build();
 
         //WHEN //THEN
@@ -149,20 +135,158 @@ class ScheduleEntryControllerTest {
     }
 
     @Test
-    void addNewScheduleEntry_whenMissingEntryDate_shouldThrowIllegalArgumentException() {
+    void addNewScheduleEntry_whenMissingEntryDate_shouldExpectStatus400() {
 
         //GIVEN
         DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Title1")
                 .description("Description")
 
-                .durationInMinutes(400)
+                .durationInMinutes(150)
                 .build();
 
         //WHEN //THEN
         webTestClient.post()
                 .uri("/api/schedule")
                 .bodyValue(dtoNewEntry)
+                .exchange()
+                .expectStatus().isEqualTo(400);
+    }
+
+    @Test
+    void updateScheduleEntry_whenIdExists_shouldReturnUpdatedEntry() {
+
+        //GIVEN
+        ScheduleEntry entry1ToBeUpdated = ScheduleEntry.builder()
+                .id("123")
+                .title("Appointment1")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(150)
+                .build();
+
+        scheduleEntryRepository.insert(entry1ToBeUpdated);
+        scheduleEntryRepository.insert(createTestEntry2());
+
+        DtoScheduleEntry dtoEntry1ToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(150)
+                .build();
+
+        //WHEN
+        ScheduleEntry actual = webTestClient.put()
+                .uri("/api/schedule/123")
+                .bodyValue(dtoEntry1ToUpdate)
+                .exchange()
+                .expectStatus().isOk()
+                .expectBody(ScheduleEntry.class)
+                .returnResult()
+                .getResponseBody();
+
+        //THEN
+        assertNotNull(actual);
+        assertNotNull(actual.getId());
+        assertEquals("Updated Title", actual.getTitle());
+        assertEquals("description1", actual.getDescription());
+        assertEquals(Instant.parse("2022-05-28T22:00:00.000Z"), actual.getEntryDate());
+        assertEquals(150, actual.getDurationInMinutes());
+    }
+
+    @Test
+    void updateScheduleEntry_whenTitleIsNull_shouldExpectStatus400() {
+
+        //GIVEN
+        DtoScheduleEntry dtoEntry1ToUpdate = DtoScheduleEntry.builder()
+                .title(null)
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(150)
+                .build();
+
+        //WHEN //THEN
+        webTestClient.put()
+                .uri("/api/schedule/123")
+                .bodyValue(dtoEntry1ToUpdate)
+                .exchange()
+                .expectStatus().isEqualTo(400);
+    }
+
+    @Test
+    void updateScheduleEntry_whenDescriptionIsNull_shouldExpectStatus400() {
+
+        //GIVEN
+        DtoScheduleEntry dtoEntry1ToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description(null)
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(150)
+                .build();
+
+        //WHEN //THEN
+        webTestClient.put()
+                .uri("/api/schedule/123")
+                .bodyValue(dtoEntry1ToUpdate)
+                .exchange()
+                .expectStatus().isEqualTo(400);
+    }
+
+    @Test
+    void updateScheduleEntry_whenDateIsNull_shouldExpectStatus400() {
+
+        //GIVEN
+        DtoScheduleEntry dtoEntry1ToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(null)
+                .durationInMinutes(150)
+                .build();
+
+        //WHEN //THEN
+        webTestClient.put()
+                .uri("/api/schedule/123")
+                .bodyValue(dtoEntry1ToUpdate)
+                .exchange()
+                .expectStatus().isEqualTo(400);
+    }
+
+    @Test
+    void updateScheduleEntry_whenDurationIsNull_shouldExpectStatus400() {
+
+        //GIVEN
+        DtoScheduleEntry dtoEntry1ToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(null)
+                .build();
+
+        //WHEN //THEN
+        webTestClient.put()
+                .uri("/api/schedule/123")
+                .bodyValue(dtoEntry1ToUpdate)
+                .exchange()
+                .expectStatus().isEqualTo(400);
+    }
+
+    @Test
+    void updateScheduleEntry_whenIdNotValid_shouldExpectStatus400() {
+        //GIVEN
+        scheduleEntryRepository.insert(createTestEntry1());
+        scheduleEntryRepository.insert(createTestEntry2());
+
+        DtoScheduleEntry dtoEntry1ToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(150)
+                .build();
+
+        //WHEN //THEN
+        webTestClient.put()
+                .uri("/api/schedule/wrongId")
+                .bodyValue(dtoEntry1ToUpdate)
                 .exchange()
                 .expectStatus().isEqualTo(400);
     }
@@ -171,22 +295,8 @@ class ScheduleEntryControllerTest {
     void deleteScheduleEntryById_whenIdExists_shouldDeleteEntry() {
 
         //GIVEN
-        ScheduleEntry scheduleEntry1 = ScheduleEntry.builder()
-                .id("123")
-                .title("Appointment1")
-                .description("description1")
-                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
-                .build();
-        ScheduleEntry scheduleEntry2 = ScheduleEntry.builder()
-                .id("456")
-                .title("Appointment2")
-                .description("description3")
-                .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
-                .durationInMinutes(600)
-                .build();
-        scheduleEntryRepository.insert(scheduleEntry1);
-        scheduleEntryRepository.insert(scheduleEntry2);
+        scheduleEntryRepository.insert(createTestEntry1());
+        scheduleEntryRepository.insert(createTestEntry2());
 
         //WHEN
         webTestClient.delete()
@@ -196,30 +306,16 @@ class ScheduleEntryControllerTest {
 
         //THEN
         List<ScheduleEntry> actual = scheduleEntryRepository.findAll();
-        List<ScheduleEntry> expected = List.of(scheduleEntry2);
+        List<ScheduleEntry> expected = List.of(createTestEntry2());
         assertEquals(expected, actual);
     }
 
     @Test
-    void deleteScheduleEntryById_whenIdNotValid_shouldThrowNoSuchElementException() {
+    void deleteScheduleEntryById_whenIdNotValid_shouldExpectStatus400() {
 
         //GIVEN
-        ScheduleEntry scheduleEntry1 = ScheduleEntry.builder()
-                .id("123")
-                .title("Appointment1")
-                .description("description1")
-                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                .durationInMinutes(400)
-                .build();
-        ScheduleEntry scheduleEntry2 = ScheduleEntry.builder()
-                .id("456")
-                .title("Appointment2")
-                .description("description3")
-                .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
-                .durationInMinutes(600)
-                .build();
-        scheduleEntryRepository.insert(scheduleEntry1);
-        scheduleEntryRepository.insert(scheduleEntry2);
+        scheduleEntryRepository.insert(createTestEntry1());
+        scheduleEntryRepository.insert(createTestEntry2());
 
         //WHEN //THEN
         webTestClient.delete()
@@ -227,4 +323,25 @@ class ScheduleEntryControllerTest {
                 .exchange()
                 .expectStatus().isEqualTo(400);
     }
+
+     private ScheduleEntry createTestEntry1() {
+       return   ScheduleEntry.builder()
+                 .id("123")
+                 .title("Appointment1")
+                 .description("description1")
+                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                 .durationInMinutes(150)
+                 .build();
+     }
+
+
+     private ScheduleEntry createTestEntry2() {
+      return ScheduleEntry.builder()
+              .id("456")
+              .title("Appointment2")
+              .description("description3")
+              .entryDate(Instant.parse("2022-06-28T22:00:00.000Z"))
+              .durationInMinutes(600)
+              .build();
+     }
 }
