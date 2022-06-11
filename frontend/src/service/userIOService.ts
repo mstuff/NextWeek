@@ -1,44 +1,42 @@
 import {DtoUserInput} from "../dto/DtoUserInput";
+import {ScheduleEntry} from "../model/ScheduleEntry";
 
-export const validateInput: (entryToValidate: DtoUserInput) => void =
+export const validateInput: (entryToValidate: DtoUserInput) => boolean =
     entryToValidate => {
         if (!entryToValidate.title) {
             alert(`Please enter a title!`);
-            return;
-        } else if (!entryToValidate.description) {
-            alert(`Please enter a description!`);
-            return;
+            return false;
+        } else if (entryToValidate.title.length <= 2) {
+            alert(`The Title must contain at least three characters!`);
+            return false;
         } else if (!entryToValidate.entryDate) {
             alert(`Please select a valid date!`);
-            return;
+            return false;
         } else if (!entryToValidate.entryTime) {
             alert(`Please enter a valid time!`);
-            return;
+            return false;
         } else if (!entryToValidate.entryDuration) {
             alert(`Please enter a duration!`);
-            return;
-        }
+            return false;
+        } else return true;
     }
 
 export const patchEntryDate: (entryDtoToPatch: DtoUserInput) => Date =
     entryDtoToPatch => {
-        validateInput(entryDtoToPatch);
-        console.log(new Date(entryDtoToPatch.entryDate!))
-        console.log(new Date(entryDtoToPatch.entryDate!.getHours()))
         return new Date(entryDtoToPatch.entryDate!.setHours(entryDtoToPatch.entryTime!.getHours(),
             entryDtoToPatch.entryTime!.getMinutes())
         )
     }
 
-export const calculateDurationInMinutes: (entryDtoToCalculateFor: DtoUserInput) => number =
-    entryDtoToCalculateFor => {
-        validateInput(entryDtoToCalculateFor);
-        return new Date(entryDtoToCalculateFor.entryDuration!).getHours() * 60 +
-            new Date(entryDtoToCalculateFor.entryDuration!).getMinutes()
+export const calculateDurationInMinutes: (entryDtoForCalculation: DtoUserInput) => number =
+    entryDtoForCalculation => {
+        return new Date(entryDtoForCalculation.entryDuration!).getHours() * 60 +
+            new Date(entryDtoForCalculation.entryDuration!).getMinutes()
     }
 
-
-
-
-
-
+export const translateDurationIntoDate: (scheduleEntry: ScheduleEntry) => Date =
+    scheduleEntry => {
+    return new Date(new Date(scheduleEntry.entryDate)
+        .setHours(scheduleEntry.durationInMinutes / 60,
+            scheduleEntry.durationInMinutes % 60));
+    }

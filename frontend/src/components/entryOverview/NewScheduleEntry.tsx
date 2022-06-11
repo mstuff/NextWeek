@@ -137,7 +137,6 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                             </div>
                         </LocalizationProvider>
                     </div>
-
                 </div>
                 <input className={"new-entry-add-button"}
                        type={"submit"}

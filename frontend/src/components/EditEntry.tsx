@@ -8,7 +8,12 @@ import {DesktopDatePicker, DesktopTimePicker} from "@mui/x-date-pickers";
 import * as React from "react";
 import Header from "./Header";
 import {DtoUserInput} from "../dto/DtoUserInput";
-import {calculateDurationInMinutes, patchEntryDate, validateInput} from "../service/userIOService";
+import {
+    translateDurationIntoDate,
+    calculateDurationInMinutes,
+    patchEntryDate,
+    validateInput
+} from "../service/userIOService";
 
 type EditEntryProps = {
     scheduleEntry: ScheduleEntry;
@@ -20,22 +25,24 @@ export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabl
 
     const [title, setTitle] = useState<string>(scheduleEntry.title);
     const [description, setDescription] = useState<string>(scheduleEntry.description);
-    const [entryDate, setEntryDate] = useState<Date | null>(scheduleEntry.entryDate);
-    const [entryTime, setEntryTime] = useState<Date | null>(scheduleEntry.entryDate);
-    const [entryDuration, setEntryDuration] = useState<Date | null>(new Date);
-
-    const entryToUpdate: DtoUserInput = {
-        title: title,
-        description: description,
-        entryDate: entryDate,
-        entryTime: entryTime,
-        entryDuration: entryDuration
-    }
-
-    validateInput(entryToUpdate);
+    const [entryDate, setEntryDate] = useState<Date | null>(new Date(scheduleEntry.entryDate));
+    const [entryTime, setEntryTime] = useState<Date | null>(new Date(scheduleEntry.entryDate));
+    const [entryDuration, setEntryDuration] = useState<Date | null>(new Date(translateDurationIntoDate(scheduleEntry)));
 
     const onUpdate = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        const entryToUpdate: DtoUserInput = {
+            title: title,
+            description: description,
+            entryDate: entryDate,
+            entryTime: entryTime,
+            entryDuration: entryDuration
+        }
+
+        if (!validateInput(entryToUpdate)) {
+            return;
+        }
 
         const updatedEntry: Omit<ScheduleEntry, "id"> = {
             title: title,
@@ -44,13 +51,12 @@ export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabl
             durationInMinutes: calculateDurationInMinutes(entryToUpdate)
         }
         saveUpdatedEntry(scheduleEntry.id, updatedEntry);
-
     }
 
-        const renderInput = (params: any) => <TextField
-            {...params}
-            variant={"standard"}
-        />
+    const renderInput = (params: any) => <TextField
+        {...params}
+        variant={"standard"}
+    />
 
 
     return <div className={"div-fixed-bg"}>
@@ -121,14 +127,14 @@ export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabl
                             </div>
                         </LocalizationProvider>
                     </div>
-
                 </div>
-                <input className={"new-entry-add-button"}
+                <button className={"edit-buttons"} onClick={() => setEditEnabled(false)}> Close</button>
+                <input className={"edit-buttons"}
                        type={"submit"}
                        value={"Update"}
                 />
             </form>
-            <button className={"back-button"} onClick={() => setEditEnabled(false)}> Back </button>
+
         </div>
     </div>
 }
