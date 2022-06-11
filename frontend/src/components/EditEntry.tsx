@@ -7,6 +7,8 @@ import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DesktopDatePicker, DesktopTimePicker} from "@mui/x-date-pickers";
 import * as React from "react";
 import Header from "./Header";
+import {DtoUserInput} from "../dto/DtoUserInput";
+import {calculateDurationInMinutes, patchEntryDate, validateInput} from "../service/userIOService";
 
 type EditEntryProps = {
     scheduleEntry: ScheduleEntry;
@@ -20,41 +22,26 @@ export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabl
     const [description, setDescription] = useState<string>(scheduleEntry.description);
     const [entryDate, setEntryDate] = useState<Date | null>(scheduleEntry.entryDate);
     const [entryTime, setEntryTime] = useState<Date | null>(scheduleEntry.entryDate);
-    const [entryDuration, setEntryDuration] = useState<Date | null>(null);
+    const [entryDuration, setEntryDuration] = useState<Date | null>(new Date);
+
+    const entryToUpdate: DtoUserInput = {
+        title: title,
+        description: description,
+        entryDate: entryDate,
+        entryTime: entryTime,
+        entryDuration: entryDuration
+    }
+
+    validateInput(entryToUpdate);
 
     const onUpdate = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        if (!title) {
-            alert(`Please enter a title!`);
-            return;
-        } else if (!description) {
-            alert(`Please enter a description!`);
-            return;
-        } else if (!entryDate) {
-            alert(`Please select a valid date!`);
-            return;
-        } else if (!entryTime) {
-            alert(`Please enter a valid time!`);
-            return;
-        } else if (!entryDuration) {
-            alert(`Please enter a duration!`);
-            return;
-        }
-
-        const patchedEntryDate: Date =
-            new Date(entryDate.setHours(entryTime.getHours(),
-                entryTime.getMinutes())
-            )
-
-        const durationInMinutes: number =
-            new Date(entryDuration).getHours() * 60 +
-            new Date(entryDuration).getMinutes()
 
         const updatedEntry: Omit<ScheduleEntry, "id"> = {
             title: title,
             description: description,
-            entryDate: patchedEntryDate,
-            durationInMinutes: durationInMinutes
+            entryDate: patchEntryDate(entryToUpdate),
+            durationInMinutes: calculateDurationInMinutes(entryToUpdate)
         }
         saveUpdatedEntry(scheduleEntry.id, updatedEntry);
 
