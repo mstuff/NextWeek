@@ -23,14 +23,22 @@ export const validateInput: (entryToValidate: DtoUserInput) => void =
 export const patchEntryDate: (entryDtoToPatch: DtoUserInput) => Date =
     entryDtoToPatch => {
         validateInput(entryDtoToPatch);
+        console.log(new Date(entryDtoToPatch.entryDate!))
+        console.log(new Date(entryDtoToPatch.entryDate!.getHours()))
         return new Date(entryDtoToPatch.entryDate!.setHours(entryDtoToPatch.entryTime!.getHours(),
             entryDtoToPatch.entryTime!.getMinutes())
         )
     }
 
-    export const calculateDurationInMinutes: (entryDtoToCalculateFor: DtoUserInput) => number =
-        entryDtoToCalculateFor => {
-            validateInput(entryDtoToCalculateFor);
-    return new Date(entryDtoToCalculateFor.entryDuration!).getHours() * 60 +
-        new Date(entryDtoToCalculateFor.entryDuration!).getMinutes()
-        }
+export const calculateDurationInMinutes: (entryDtoToCalculateFor: DtoUserInput) => number =
+    entryDtoToCalculateFor => {
+        validateInput(entryDtoToCalculateFor);
+        return new Date(entryDtoToCalculateFor.entryDuration!).getHours() * 60 +
+            new Date(entryDtoToCalculateFor.entryDuration!).getMinutes()
+    }
+
+
+
+
+
+
