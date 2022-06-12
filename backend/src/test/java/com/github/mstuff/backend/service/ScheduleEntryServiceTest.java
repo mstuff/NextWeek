@@ -1,6 +1,6 @@
 package com.github.mstuff.backend.service;
 
-import com.github.mstuff.backend.dto.DtoNewScheduleEntry;
+import com.github.mstuff.backend.dto.DtoScheduleEntry;
 import com.github.mstuff.backend.model.ScheduleEntry;
 import com.github.mstuff.backend.repository.ScheduleEntryRepository;
 import org.junit.jupiter.api.Test;
@@ -63,17 +63,17 @@ class ScheduleEntryServiceTest {
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
                 .durationInMinutes(400)
                 .build();
-        when(scheduleEntryRepository.insert(newEntry1))
-                .thenReturn(ScheduleEntry.builder()
-                        .id("123-test")
-                        .title("Appointment1")
-                        .description("description1")
-                        .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
-                        .durationInMinutes(400)
-                        .build());
+
+        when(scheduleEntryRepository.insert(newEntry1)).thenReturn(ScheduleEntry.builder()
+                .id("123-test")
+                .title("Appointment1")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build());
 
         //WHEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
@@ -100,7 +100,7 @@ class ScheduleEntryServiceTest {
 
         //GIVEN
         //WHEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
 
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
@@ -117,7 +117,7 @@ class ScheduleEntryServiceTest {
 
         //GIVEN
         //WHEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Appointment1")
 
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
@@ -134,7 +134,7 @@ class ScheduleEntryServiceTest {
 
         //GIVEN
         //WHEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
 
@@ -151,7 +151,7 @@ class ScheduleEntryServiceTest {
 
         //GIVEN
         //WHEN
-        DtoNewScheduleEntry dtoNewEntry = DtoNewScheduleEntry.builder()
+        DtoScheduleEntry dtoNewEntry = DtoScheduleEntry.builder()
                 .title("Appointment1")
                 .description("description1")
                 .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
@@ -162,6 +162,136 @@ class ScheduleEntryServiceTest {
         assertThrows(IllegalArgumentException.class,
                 () -> scheduleEntryService.addNewScheduleEntry(dtoNewEntry));
     }
+
+    @Test
+    void updateScheduleEntry_whenEntryExists_shouldReturnUpdatedEntry() {
+
+        //GIVEN
+        String id = "123";
+        ScheduleEntry updatedEntry = ScheduleEntry.builder()
+                .id("123")
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+
+        when(scheduleEntryRepository.existsById("123")).thenReturn(true);
+        when(scheduleEntryRepository.save(any())).thenReturn(updatedEntry);
+
+        DtoScheduleEntry dtoEntryToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+
+        //WHEN
+        ScheduleEntry actual = scheduleEntryService.updateScheduleEntry(id, dtoEntryToUpdate);
+
+        //THEN
+        ScheduleEntry expected = ScheduleEntry.builder()
+                .id("123")
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+
+        verify(scheduleEntryRepository).save(updatedEntry);
+        verify(scheduleEntryRepository).existsById(id);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    void updateScheduleEntry_whenEntryTitleIsNull_shouldThrowIllegalArgumentException() {
+
+        //GIVEN
+        String id = "123";
+        DtoScheduleEntry dtoEntryToUpdate = DtoScheduleEntry.builder()
+                .title(null)
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+
+        //WHEN //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.updateScheduleEntry(id, dtoEntryToUpdate));
+    }
+
+    @Test
+    void updateScheduleEntry_whenEntryDescriptionIsNull_shouldThrowIllegalArgumentException() {
+
+        //GIVEN
+        String id = "123";
+        DtoScheduleEntry dtoEntryToUpdate = DtoScheduleEntry.builder()
+                .title("Title1")
+                .description(null)
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+
+        //WHEN //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.updateScheduleEntry(id, dtoEntryToUpdate));
+    }
+
+    @Test
+    void updateScheduleEntry_whenEntryDateIsNull_shouldThrowIllegalArgumentException() {
+
+        //GIVEN
+        String id = "123";
+        DtoScheduleEntry dtoEntryToUpdate = DtoScheduleEntry.builder()
+                .title("Title1")
+                .description("Description1")
+                .entryDate(null)
+                .durationInMinutes(400)
+                .build();
+
+        //WHEN //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.updateScheduleEntry(id, dtoEntryToUpdate));
+    }
+
+    @Test
+    void updateScheduleEntry_whenDurationIsNull_shouldThrowIllegalArgumentException() {
+
+        //GIVEN
+        String id = "123";
+        DtoScheduleEntry dtoEntryToUpdate = DtoScheduleEntry.builder()
+                .title("Title1")
+                .description("Description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(null)
+                .build();
+
+        //WHEN //THEN
+        assertThrows(IllegalArgumentException.class,
+                () -> scheduleEntryService.updateScheduleEntry(id, dtoEntryToUpdate));
+    }
+
+    @Test
+    void updateScheduleEntry_whenEntryDoesNotExist_shouldThrowNoSuchElementException() {
+
+        //GIVEN
+        String id = "123";
+        DtoScheduleEntry dtoEntryToUpdate = DtoScheduleEntry.builder()
+                .title("Updated Title")
+                .description("description1")
+                .entryDate(Instant.parse("2022-05-28T22:00:00.000Z"))
+                .durationInMinutes(400)
+                .build();
+
+        when(scheduleEntryRepository.existsById("123")).thenReturn(false);
+
+        //WHEN //THEN
+
+        assertThrows(NoSuchElementException.class,
+                () -> scheduleEntryService.updateScheduleEntry(id, dtoEntryToUpdate));
+        verify(scheduleEntryRepository).existsById(id);
+    }
+
 
     @Test
     void deleteEntryById_whenEntryExists_shouldDeleteEntry() {

@@ -20,11 +20,12 @@ export default function DeleteAlert({scheduleEntry, deleteScheduleEntry, setDele
         <div className={"delete-entry-alert-card"}>
             <div className={"delete-alert-text"}> Delete this one?</div>
             <div className={"position-delete-alert-buttons"}>
-                <button className={"dont-delete-button"}
-                        onClick={() => setDeleteAlertEnabled(false)}> No!
-                </button>
+
                 <button className={"delete-confirm-button"}
                         onClick={confirmDelete}> Delete
+                </button>
+                <button className={"dont-delete-button"}
+                        onClick={() => setDeleteAlertEnabled(false)}> No!
                 </button>
             </div>
         </div>

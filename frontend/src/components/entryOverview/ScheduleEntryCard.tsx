@@ -1,18 +1,30 @@
 import {ScheduleEntry} from "../../model/ScheduleEntry";
-import {BsXSquareFill} from "react-icons/bs";
+import {BsPencilFill, BsXSquareFill} from "react-icons/bs";
 import "./ScheduleEntryCard.css"
 import {IconContext} from "react-icons";
 import {MouseEventHandler, useState} from "react";
 import DeleteAlert from "../DeleteAlert";
+import EditEntry from "../EditEntry";
 
 type ScheduleEntryCardProps = {
     scheduleEntry: ScheduleEntry;
+    saveUpdatedEntry: (entryId: string, entryToUpdate: Omit<ScheduleEntry, "id">) => void;
     deleteScheduleEntry: (entryId: string) => void;
 }
 
-export default function ScheduleEntryCard({scheduleEntry, deleteScheduleEntry}: ScheduleEntryCardProps) {
+export default function ScheduleEntryCard({
+                                              scheduleEntry,
+                                              saveUpdatedEntry,
+                                              deleteScheduleEntry
+                                          }: ScheduleEntryCardProps) {
 
+    const [editEnabled, setEditEnabled] = useState<boolean>(false);
     const [deleteAlertEnabled, setDeleteAlertEnabled] = useState<boolean>(false);
+
+    const handleEdit: MouseEventHandler<HTMLButtonElement> = (event) => {
+        event.preventDefault()
+        setEditEnabled(true);
+    }
 
     const handleDelete: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
@@ -22,10 +34,15 @@ export default function ScheduleEntryCard({scheduleEntry, deleteScheduleEntry}: 
     return (
         <div className={"schedule-entry-card"}>
             <div>
+                {editEnabled && <EditEntry scheduleEntry={scheduleEntry}
+                                           saveUpdatedEntry={saveUpdatedEntry}
+                                           setEditEnabled={setEditEnabled}/>}
+            </div>
+            <div>
                 <div className={"title-entry-card"}>{scheduleEntry.title}</div>
                 {deleteAlertEnabled && <DeleteAlert scheduleEntry={scheduleEntry}
-                                       deleteScheduleEntry={deleteScheduleEntry}
-                                       setDeleteAlertEnabled={setDeleteAlertEnabled}/>}
+                                                    deleteScheduleEntry={deleteScheduleEntry}
+                                                    setDeleteAlertEnabled={setDeleteAlertEnabled}/>}
             </div>
             <div className={"entry-card-info-and-actions-tiles"}>
                 <div className={"entry-card-time-info"}>
@@ -47,6 +64,7 @@ export default function ScheduleEntryCard({scheduleEntry, deleteScheduleEntry}: 
                 <div className={"action-tiles"}>
                     <IconContext.Provider
                         value={{size: "20px", style: {color: "#82A3A1", backgroundColor: "#565656"}}}>
+                        <button className={"delete-button"} onClick={handleEdit}><BsPencilFill/></button>
                         <button className={"delete-button"} onClick={handleDelete}><BsXSquareFill/></button>
                     </IconContext.Provider>
                 </div>

@@ -1,31 +1,38 @@
-import {ScheduleEntry} from "../../model/ScheduleEntry";
+import {ScheduleEntry} from "../model/ScheduleEntry";
+import "./EditEntry.css"
 import {FormEvent, useState} from "react";
-import "./NewScheduleEntry.css";
+import TextField from "@mui/material/TextField";
 import {LocalizationProvider} from "@mui/x-date-pickers/LocalizationProvider";
 import {AdapterDateFns} from "@mui/x-date-pickers/AdapterDateFns";
 import {DesktopDatePicker, DesktopTimePicker} from "@mui/x-date-pickers";
-import TextField from "@mui/material/TextField";
 import * as React from "react";
-import {DtoUserInput} from "../../dto/DtoUserInput";
-import {calculateDurationInMinutes, patchEntryDate, validateInput} from "../../service/userIOService";
+import Header from "./Header";
+import {DtoUserInput} from "../dto/DtoUserInput";
+import {
+    translateDurationIntoDate,
+    calculateDurationInMinutes,
+    patchEntryDate,
+    validateInput
+} from "../service/userIOService";
 
-
-type NewScheduleEntryProps = {
-    addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
+type EditEntryProps = {
+    scheduleEntry: ScheduleEntry;
+    saveUpdatedEntry: (entryId: string, entryToUpdate: Omit<ScheduleEntry, "id">) => void;
+    setEditEnabled: (status: boolean) => void;
 }
 
-export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryProps) {
+export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabled}: EditEntryProps) {
 
-    const [title, setTitle] = useState<string>('');
-    const [description, setDescription] = useState<string>('');
-    const [entryDate, setEntryDate] = useState<Date | null>(null);
-    const [entryTime, setEntryTime] = useState<Date | null>(null);
-    const [entryDuration, setEntryDuration] = useState<Date | null>(null);
+    const [title, setTitle] = useState<string>(scheduleEntry.title);
+    const [description, setDescription] = useState<string>(scheduleEntry.description);
+    const [entryDate, setEntryDate] = useState<Date | null>(new Date(scheduleEntry.entryDate));
+    const [entryTime, setEntryTime] = useState<Date | null>(new Date(scheduleEntry.entryDate));
+    const [entryDuration, setEntryDuration] = useState<Date | null>(new Date(translateDurationIntoDate(scheduleEntry)));
 
-    const onAdd = (event: FormEvent<HTMLFormElement>) => {
+    const onUpdate = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        const newEntryDto: DtoUserInput = {
+        const entryToUpdate: DtoUserInput = {
             title: title,
             description: description,
             entryDate: entryDate,
@@ -33,24 +40,17 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
             entryDuration: entryDuration
         }
 
-        if (!validateInput(newEntryDto)) {
+        if (!validateInput(entryToUpdate)) {
             return;
         }
 
-        const newScheduleEntry: Omit<ScheduleEntry, "id"> = {
+        const updatedEntry: Omit<ScheduleEntry, "id"> = {
             title: title,
             description: description,
-            entryDate: patchEntryDate(newEntryDto),
-            durationInMinutes: calculateDurationInMinutes(newEntryDto)
+            entryDate: patchEntryDate(entryToUpdate),
+            durationInMinutes: calculateDurationInMinutes(entryToUpdate)
         }
-
-        addScheduleEntry(newScheduleEntry);
-
-        setTitle('');
-        setDescription('');
-        setEntryDate(null);
-        setEntryTime(null);
-        setEntryDuration(null);
+        saveUpdatedEntry(scheduleEntry.id, updatedEntry);
     }
 
     const renderInput = (params: any) => <TextField
@@ -58,9 +58,11 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
         variant={"standard"}
     />
 
-    return (
-        <div className={"new-entry-form"}>
-            <form onSubmit={onAdd}>
+
+    return <div className={"div-fixed-bg"}>
+        <Header/>
+        <div className={"div-fixed-edit"}>
+            <form onSubmit={onUpdate}>
                 <div className={"entry-fields-container"}>
                     <div className={"text-fields-container"}>
                         <div className={"margin-for-mui-fields"}>
@@ -126,11 +128,13 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                         </LocalizationProvider>
                     </div>
                 </div>
-                <input className={"new-entry-add-button"}
+                <button className={"edit-buttons"} onClick={() => setEditEnabled(false)}> Close</button>
+                <input className={"edit-buttons"}
                        type={"submit"}
-                       value={"Add a new entry"}
+                       value={"Update"}
                 />
             </form>
+
         </div>
-    )
+    </div>
 }

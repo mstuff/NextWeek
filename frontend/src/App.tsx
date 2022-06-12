@@ -10,7 +10,7 @@ import AllEntriesOverviewPage from "./pages/AllEntriesOverviewPage";
 
 export default function App() {
 
-    const {scheduleEntries, addScheduleEntry, deleteScheduleEntry} = useScheduleEntries();
+    const {scheduleEntries, addScheduleEntry, saveUpdatedEntry, deleteScheduleEntry} = useScheduleEntries();
 
     return (
         <div className="App">
@@ -21,11 +21,13 @@ export default function App() {
                     <Route path={'/overview'}
                            element={<AllEntriesOverviewPage scheduleEntries={scheduleEntries}
                                                             addScheduleEntry={addScheduleEntry}
+                                                            saveUpdatedEntry={saveUpdatedEntry}
                                                             deleteScheduleEntry={deleteScheduleEntry}/>}
                     />
                     <Route path={'/schedule'}
                            element={<SchedulePage scheduleEntries={scheduleEntries}
                                                   addScheduleEntry={addScheduleEntry}
+                                                  saveUpdatedEntry={saveUpdatedEntry}
                                                   deleteScheduleEntry={deleteScheduleEntry}/>}
                     />
                 </Routes>

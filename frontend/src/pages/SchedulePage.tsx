@@ -8,12 +8,14 @@ import WeekBoard from "../components/weekBoard/WeekBoard";
 type SchedulePageProps = {
     scheduleEntries: ScheduleEntry [];
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
+    saveUpdatedEntry: (entryId: string, entryToUpdate: Omit<ScheduleEntry, "id">) => void;
     deleteScheduleEntry: (entryId: string) => void;
 }
 
 export default function SchedulePage({
                                          scheduleEntries,
                                          addScheduleEntry,
+                                         saveUpdatedEntry,
                                          deleteScheduleEntry
                                      }: SchedulePageProps) {
 
@@ -28,6 +30,7 @@ export default function SchedulePage({
         </div>
         <div className={"schedule-page-div-list-of-entries"}>
             <BoardOfScheduleEntries scheduleEntries={scheduleEntries}
+                                    saveUpdatedEntry={saveUpdatedEntry}
                                     deleteScheduleEntry={deleteScheduleEntry}/>
         </div>
     </div>

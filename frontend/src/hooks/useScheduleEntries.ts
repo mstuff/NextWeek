@@ -1,10 +1,12 @@
 import {useEffect, useState} from "react";
 import {ScheduleEntry} from "../model/ScheduleEntry";
 import {
+    getAllScheduleEntriesByApi,
     addNewScheduleEntry,
-    deleteScheduleEntryById,
-    getAllScheduleEntriesByApi
+    updateScheduleEntryById,
+    deleteScheduleEntryById
 } from "../service/scheduleEntryApiService";
+
 
 
 export default function useScheduleEntries() {
@@ -25,6 +27,16 @@ export default function useScheduleEntries() {
             .catch(console.error);
     }
 
+    const saveUpdatedEntry = (idOfEntryToUpdate: string, entryToUpdate: Omit<ScheduleEntry, "id">) => {
+        updateScheduleEntryById(idOfEntryToUpdate, entryToUpdate)
+            .then(updatedEntry => {
+                setScheduleEntries(scheduleEntries.map(entry => entry.id === idOfEntryToUpdate
+                    ? updatedEntry
+                    : entry))
+            })
+            .catch(console.error)
+    }
+
     const deleteScheduleEntry = (entryId: string) => {
         deleteScheduleEntryById(entryId)
             .then(() => setScheduleEntries(scheduleEntries
@@ -32,5 +44,5 @@ export default function useScheduleEntries() {
             .catch(console.error);
     }
 
-    return {scheduleEntries, addScheduleEntry, deleteScheduleEntry}
+    return {scheduleEntries, addScheduleEntry, saveUpdatedEntry, deleteScheduleEntry}
 }
