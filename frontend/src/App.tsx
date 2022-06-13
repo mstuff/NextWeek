@@ -6,6 +6,7 @@ import useScheduleEntries from "./hooks/useScheduleEntries";
 import Header from "./components/Header";
 import NavigationBar from "./components/NavigationBar";
 import AllEntriesOverviewPage from "./pages/AllEntriesOverviewPage";
+import {ToastContainer} from "react-toastify";
 
 
 export default function App() {
@@ -14,6 +15,9 @@ export default function App() {
 
     return (
         <div className="App">
+            <ToastContainer autoClose={9000}
+                            hideProgressBar={true}
+                            position={"top-center"}/>
             <div>
                 <Header/>
                 <NavigationBar/>

@@ -10,7 +10,8 @@ import {
     patchEntryDate,
     validateInput
 } from "../service/userIOService";
-import EntryFields from "./EntryFields";
+import InputFields from "./InputFields";
+
 
 type EditEntryProps = {
     scheduleEntry: ScheduleEntry;
@@ -54,7 +55,7 @@ export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabl
         <Header/>
         <div className={"div-fixed-edit"}>
             <form onSubmit={onUpdate}>
-                <EntryFields title={title}
+                <InputFields title={title}
                              setTitle={setTitle}
                              description={description}
                              setDescription={setDescription}
@@ -70,7 +71,6 @@ export default function EditEntry({scheduleEntry, saveUpdatedEntry, setEditEnabl
                        value={"Update"}
                 />
             </form>
-
         </div>
     </div>
 }

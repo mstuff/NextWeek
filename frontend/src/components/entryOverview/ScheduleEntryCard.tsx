@@ -64,8 +64,8 @@ export default function ScheduleEntryCard({
                 <div className={"action-tiles"}>
                     <IconContext.Provider
                         value={{size: "20px", style: {color: "#82A3A1", backgroundColor: "#565656"}}}>
-                        <button className={"delete-button"} onClick={handleEdit}><BsPencilFill/></button>
-                        <button className={"delete-button"} onClick={handleDelete}><BsXSquareFill/></button>
+                        <button className={"button-with-icon"} onClick={handleEdit}><BsPencilFill/></button>
+                        <button className={"button-with-icon"} onClick={handleDelete}><BsXSquareFill/></button>
                     </IconContext.Provider>
                 </div>
             </div>

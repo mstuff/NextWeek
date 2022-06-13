@@ -5,7 +5,7 @@ import {DesktopDatePicker, DesktopTimePicker} from "@mui/x-date-pickers";
 import * as React from "react";
 
 
-type EntryFieldsProps = {
+type InputFieldsProps = {
     title: string,
     setTitle: (eventValue: string) => void,
     description: string,
@@ -18,13 +18,13 @@ type EntryFieldsProps = {
     setEntryDuration: (eventValue: Date | null) => void
 }
 
-export default function EntryFields({
+export default function InputFields({
                                         title, setTitle,
                                         description, setDescription,
                                         entryDate, setEntryDate,
                                         entryTime, setEntryTime,
                                         entryDuration, setEntryDuration
-                                    }: EntryFieldsProps) {
+                                    }: InputFieldsProps) {
 
     const renderInput = (params: any) => <TextField
         {...params}

@@ -4,7 +4,7 @@ import "./NewScheduleEntry.css";
 import * as React from "react";
 import {DtoUserInput} from "../../dto/DtoUserInput";
 import {calculateDurationInMinutes, patchEntryDate, validateInput} from "../../service/userIOService";
-import EntryFields from "../EntryFields";
+import InputFields from "../InputFields";
 
 
 type NewScheduleEntryProps = {
@@ -53,7 +53,7 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
     return (
         <div className={"new-entry-form"}>
             <form onSubmit={onAdd}>
-                <EntryFields title={title}
+                <InputFields title={title}
                              setTitle={setTitle}
                              description={description}
                              setDescription={setDescription}
