@@ -6,7 +6,8 @@ import {
     updateScheduleEntryById,
     deleteScheduleEntryById
 } from "../service/scheduleEntryApiService";
-
+import {toast} from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export default function useScheduleEntries() {
@@ -16,15 +17,15 @@ export default function useScheduleEntries() {
     useEffect(() => {
         getAllScheduleEntriesByApi()
             .then(data => {
-                data.length !== 0 ? setScheduleEntries(data) : alert("So far no entries!")
+                data.length !== 0 ? setScheduleEntries(data) : toast.info("So far no entries!")
             })
-            .catch(console.error);
+            .catch(() => toast.error("Connection failed, please try again later"));
     }, [])
 
     const addScheduleEntry = (newEntry: Omit<ScheduleEntry, "id">) => {
         addNewScheduleEntry(newEntry)
             .then(addedEntry => setScheduleEntries([...scheduleEntries, addedEntry]))
-            .catch(console.error);
+            .catch(() => toast.error("Your new entry could not be added"));
     }
 
     const saveUpdatedEntry = (idOfEntryToUpdate: string, entryToUpdate: Omit<ScheduleEntry, "id">) => {
@@ -34,14 +35,16 @@ export default function useScheduleEntries() {
                     ? updatedEntry
                     : entry))
             })
-            .catch(console.error)
+            .then(() => toast.success("Your entry was updated!"))
+            .catch(() => toast.error("Your entry could not be updated"));
     }
 
     const deleteScheduleEntry = (entryId: string) => {
         deleteScheduleEntryById(entryId)
             .then(() => setScheduleEntries(scheduleEntries
                 .filter(entry => entry.id !== entryId)))
-            .catch(console.error);
+            .then(() => toast.success("Entry removed"))
+            .catch(() => toast.error("Your entry could not be removed"));
     }
 
     return {scheduleEntries, addScheduleEntry, saveUpdatedEntry, deleteScheduleEntry}
