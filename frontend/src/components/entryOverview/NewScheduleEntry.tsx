@@ -9,9 +9,10 @@ import InputFields from "../InputFields";
 
 type NewScheduleEntryProps = {
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
+    setAddEntryEnabled: (status: boolean) => void;
 }
 
-export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryProps) {
+export default function NewScheduleEntry({addScheduleEntry, setAddEntryEnabled}: NewScheduleEntryProps) {
 
     const [title, setTitle] = useState<string>('');
     const [description, setDescription] = useState<string>('');
@@ -63,6 +64,7 @@ export default function NewScheduleEntry({addScheduleEntry}: NewScheduleEntryPro
                              setEntryTime={setEntryTime}
                              entryDuration={entryDuration}
                              setEntryDuration={setEntryDuration} />
+                <button className={"edit-buttons"} onClick={() => setAddEntryEnabled(false)}> Close</button>
                 <input className={"new-entry-add-button"}
                        type={"submit"}
                        value={"Add a new entry"}
