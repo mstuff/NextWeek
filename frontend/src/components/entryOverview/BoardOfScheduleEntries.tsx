@@ -16,7 +16,7 @@ export default function BoardOfScheduleEntries({
                                                }: BoardOfScheduleEntriesProps) {
     return (
         <div>
-            <h2 className={"entry-board-header"}> My appointments: </h2>
+            <h2 className={"entry-board-header"}> My appointments </h2>
             <div className={"board-of-schedule-entries"}>
 
                 {scheduleEntries.map(entry => <ScheduleEntryCard key={entry.id}

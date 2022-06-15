@@ -3,6 +3,7 @@ import BoardOfScheduleEntries from "../components/entryOverview/BoardOfScheduleE
 import "./SchedulePage.css"
 import WeekBoardHeadLine from "../components/weekBoard/WeekBoardHeadLine";
 
+
 type SchedulePageProps = {
     scheduleEntries: ScheduleEntry [];
     addScheduleEntry: (newEntry: Omit<ScheduleEntry, "id">) => void;
