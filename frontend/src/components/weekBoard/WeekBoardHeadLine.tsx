@@ -9,6 +9,7 @@ import {ScheduleEntry} from "../../model/ScheduleEntry";
 import NewScheduleEntry from "../entryOverview/NewScheduleEntry";
 import {toast} from "react-toastify";
 import WeekBoard from "./WeekBoard";
+import {isValid} from "date-fns";
 
 
 type WeekBoardHeadLineProps = {
@@ -20,44 +21,50 @@ export default function WeekBoardHeadLine({scheduleEntries, addScheduleEntry}: W
 
     const [selectedDay, setSelectedDay] = useState<Date>(new Date());
     const [selectedWeek, setSelectedWeek] = useState<Date []>([]);
-
-    const [closeButtonEnabled, setCloseButtonEnabled] = useState<boolean>(false);
+    const [closeScheduleViewButtonEnabled, setCloseScheduleViewButtonEnabled] = useState<boolean>(false);
     const [weekBoardEnabled, setWeekBoardEnabled] = useState<boolean>(false);
     const [addEntryEnabled, setAddEntryEnabled] = useState<boolean>(false);
     const [open, setOpen] = useState<boolean>(false);
-
 
     const handleAddEntry: MouseEventHandler<HTMLButtonElement> = (event) => {
         event.preventDefault();
         setAddEntryEnabled(true);
     }
 
-    const closeWeekBoard: MouseEventHandler<HTMLButtonElement> = (event) => {
-        event.preventDefault();
+    const closeWeekBoard: MouseEventHandler<HTMLButtonElement> = () => {
         setWeekBoardEnabled(false);
-        setCloseButtonEnabled(false);
+        setCloseScheduleViewButtonEnabled(false);
     }
 
-    const onSelect = (event: FormEvent<HTMLFormElement>) => {
-        event.preventDefault();
-        if (!selectedDay) {
+    const showWeekBoard: MouseEventHandler<HTMLButtonElement> = () => {
+        onSelect(selectedDay);
+        setCloseScheduleViewButtonEnabled(true);
+    }
+
+    const handleDateSelection = (event: FormEvent<HTMLInputElement> | null) => {
+        if (event && event instanceof Date && isValid(event)) {
+            onSelect(event)
+        } else {
             toast.warning('Please select a valid date');
-            return;
         }
+    }
+
+    const onSelect = (enteredDay: Date) => {
+        setSelectedDay(enteredDay);
 
         setSelectedWeek([]);
         setSelectedWeek(
             (week) => [...week,
-                new Date(selectedDay),
-                new Date(selectedDay.getFullYear(), selectedDay.getMonth(), selectedDay.getDate() + 1),
-                new Date(selectedDay.getFullYear(), selectedDay.getMonth(), selectedDay.getDate() + 2),
-                new Date(selectedDay.getFullYear(), selectedDay.getMonth(), selectedDay.getDate() + 3),
-                new Date(selectedDay.getFullYear(), selectedDay.getMonth(), selectedDay.getDate() + 4),
-                new Date(selectedDay.getFullYear(), selectedDay.getMonth(), selectedDay.getDate() + 5),
-                new Date(selectedDay.getFullYear(), selectedDay.getMonth(), selectedDay.getDate() + 6)]);
+                new Date(enteredDay),
+                new Date(enteredDay.getFullYear(), enteredDay.getMonth(), enteredDay.getDate() + 1),
+                new Date(enteredDay.getFullYear(), enteredDay.getMonth(), enteredDay.getDate() + 2),
+                new Date(enteredDay.getFullYear(), enteredDay.getMonth(), enteredDay.getDate() + 3),
+                new Date(enteredDay.getFullYear(), enteredDay.getMonth(), enteredDay.getDate() + 4),
+                new Date(enteredDay.getFullYear(), enteredDay.getMonth(), enteredDay.getDate() + 5),
+                new Date(enteredDay.getFullYear(), enteredDay.getMonth(), enteredDay.getDate() + 6)]);
 
         setWeekBoardEnabled(true);
-        setCloseButtonEnabled(true);
+        setCloseScheduleViewButtonEnabled(true);
     }
 
     const renderInput = (params: any) => <TextField
@@ -69,8 +76,7 @@ export default function WeekBoardHeadLine({scheduleEntries, addScheduleEntry}: W
     return (
         <div>
             <div className={"week-board-head"}>
-                <form className={"day-picker"}
-                      onSubmit={onSelect}>
+                <form className={"day-picker"}>
                     <LocalizationProvider dateAdapter={AdapterDateFns}>
                         <DesktopDatePicker
                             className={"start-picker-field"}
@@ -81,17 +87,19 @@ export default function WeekBoardHeadLine({scheduleEntries, addScheduleEntry}: W
                             mask={"__.__.____"}
                             value={selectedDay}
                             inputFormat={"dd.MM.yyyy"}
-                            onChange={(newValue) => {
-                                newValue && setSelectedDay((newValue));
+                            onChange={(inputElement: FormEvent<HTMLInputElement> | null) => {
+                                inputElement && handleDateSelection(inputElement);
                             }}
                             renderInput={renderInput}
                         />
                     </LocalizationProvider>
-                    <input className={"select-buttons"}
-                           type={"submit"}
-                           value={"Show my week"}/>
                 </form>
-                {closeButtonEnabled &&
+                {!closeScheduleViewButtonEnabled &&
+                    <button className={"select-buttons"}
+                            onClick={showWeekBoard}> Show overview
+                    </button>}
+
+                {closeScheduleViewButtonEnabled &&
                     <button className={"select-buttons"}
                             onClick={closeWeekBoard}> Close overview
                     </button>}
