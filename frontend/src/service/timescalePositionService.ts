@@ -1,13 +1,18 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
 
 
-const minutesPerDay: number = 24 * 60;
+const timeToStartDay: number = 7;
+const timeToEndDay: number = 22;
+const customizedHoursPerDay: number = timeToEndDay - timeToStartDay;
+
+
+const minutesPerDay: number = customizedHoursPerDay * 60;
 
 export const getPositionPercentFromEntryTime: (scheduleEntry: ScheduleEntry) => string
     = (scheduleEntry) => {
 
     const entryTimeInMinutes: number =
-        new Date(scheduleEntry.entryDate).getHours() * 60 +
+        (new Date(scheduleEntry.entryDate).getHours()-timeToStartDay) * 60 +
         new Date(scheduleEntry.entryDate).getMinutes();
 
     return ((100 * entryTimeInMinutes) / minutesPerDay)
