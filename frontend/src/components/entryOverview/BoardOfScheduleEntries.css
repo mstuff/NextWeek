@@ -1,4 +1,11 @@
 
+.entry-board-header {
+    display: flex;
+    justify-content: center;
+
+    margin: 1% 2% 1% 2%;
+}
+
 .board-of-schedule-entries {
     display: flex;
     flex-direction: row;

@@ -1,6 +1,5 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
 import BoardOfScheduleEntries from "../components/entryOverview/BoardOfScheduleEntries";
-import NewScheduleEntry from "../components/entryOverview/NewScheduleEntry";
 import "./AllEntriesOverviewPage.css"
 
 
@@ -13,15 +12,11 @@ type AllEntriesOverviewPageProps = {
 
 export default function AllEntriesOverviewPage({
                                                    scheduleEntries,
-                                                   addScheduleEntry,
                                                    saveUpdatedEntry,
                                                    deleteScheduleEntry
                                                }: AllEntriesOverviewPageProps) {
     return <div>
         <div className={"container"}>
-            <div className={"overview-page-div-new-entry"}>
-                <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
-            </div>
         </div>
         <div className={"overview-page-div-list-of-entries"}>
             <BoardOfScheduleEntries scheduleEntries={scheduleEntries}

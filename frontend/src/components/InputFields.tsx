@@ -45,8 +45,10 @@ export default function InputFields({
                 </div>
                 <div className={"margin-for-mui-fields"}>
                     <TextField
-                        id={"standard-basic"}
+                        id={"standard-multiline-static"}
                         label={"Description"}
+                        multiline
+                        rows={3.7}
                         variant={"standard"}
                         value={description}
                         onChange={event => event && setDescription(event.target.value)}

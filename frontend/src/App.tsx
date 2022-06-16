@@ -28,7 +28,7 @@ export default function App() {
                                                             saveUpdatedEntry={saveUpdatedEntry}
                                                             deleteScheduleEntry={deleteScheduleEntry}/>}
                     />
-                    <Route path={'/schedule'}
+                    <Route path={'/'}
                            element={<SchedulePage scheduleEntries={scheduleEntries}
                                                   addScheduleEntry={addScheduleEntry}
                                                   saveUpdatedEntry={saveUpdatedEntry}

@@ -1,9 +1,8 @@
 import {ScheduleEntry} from "../model/ScheduleEntry";
 import BoardOfScheduleEntries from "../components/entryOverview/BoardOfScheduleEntries";
-import NewScheduleEntry from "../components/entryOverview/NewScheduleEntry";
-
 import "./SchedulePage.css"
-import WeekBoard from "../components/weekBoard/WeekBoard";
+import WeekBoardHeadLine from "../components/weekBoard/WeekBoardHeadLine";
+
 
 type SchedulePageProps = {
     scheduleEntries: ScheduleEntry [];
@@ -21,12 +20,11 @@ export default function SchedulePage({
 
     return <div>
         <div>
-            <WeekBoard scheduleEntries={scheduleEntries}/>
+            <WeekBoardHeadLine scheduleEntries={scheduleEntries}
+                               addScheduleEntry={addScheduleEntry}/>
         </div>
         <div className={"schedule-page-container"}>
-            <div className={"schedule-page-div-new-entry"}>
-                <NewScheduleEntry addScheduleEntry={addScheduleEntry}/>
-            </div>
+
         </div>
         <div className={"schedule-page-div-list-of-entries"}>
             <BoardOfScheduleEntries scheduleEntries={scheduleEntries}
