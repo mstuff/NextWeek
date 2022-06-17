@@ -25,7 +25,7 @@ export default function useScheduleEntries() {
     const addScheduleEntry = (newEntry: Omit<ScheduleEntry, "id">) => {
         addNewScheduleEntry(newEntry)
             .then(addedEntry => setScheduleEntries([...scheduleEntries, addedEntry]))
-            .catch(() => toast.error("Your new entry could not be added"));
+            .catch(() => toast.error("The new entry could not be added"));
     }
 
     const saveUpdatedEntry = (idOfEntryToUpdate: string, entryToUpdate: Omit<ScheduleEntry, "id">) => {
@@ -35,8 +35,8 @@ export default function useScheduleEntries() {
                     ? updatedEntry
                     : entry))
             })
-            .then(() => toast.success("Your entry was updated!"))
-            .catch(() => toast.error("Your entry could not be updated"));
+            .then(() => toast.success("The entry was updated!"))
+            .catch(() => toast.error("The entry could not be updated"));
     }
 
     const deleteScheduleEntry = (entryId: string) => {

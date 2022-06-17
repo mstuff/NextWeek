@@ -1,6 +1,7 @@
 import ScheduleEntryCard from "./ScheduleEntryCard";
 import {ScheduleEntry} from "../../model/ScheduleEntry";
 import "./BoardOfScheduleEntries.css";
+import {sortDescendingByDate} from "../../service/helperFunctionsService";
 
 
 type BoardOfScheduleEntriesProps = {
@@ -14,6 +15,9 @@ export default function BoardOfScheduleEntries({
                                                    saveUpdatedEntry,
                                                    deleteScheduleEntry
                                                }: BoardOfScheduleEntriesProps) {
+
+    scheduleEntries.sort(sortDescendingByDate);
+
     return (
         <div>
             <h2 className={"entry-board-header"}> My appointments </h2>
